@@ -14,6 +14,8 @@ import { LoginPage } from '../pages/login/login';
 import { MapsPage } from '../pages/maps/maps';
 import { NewsPage } from '../pages/news/news';
 
+import { MdDetailPage } from '../pages/md-detail/md-detail';
+
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { ImgFallbackModule } from 'ngx-img-fallback';
@@ -29,7 +31,8 @@ import { ImgFallbackModule } from 'ngx-img-fallback';
     LoginPage,
     KapalPage,
     MapsPage,
-    NewsPage
+    NewsPage,
+    MdDetailPage,
   ],
   imports: [
     BrowserModule,
@@ -48,7 +51,8 @@ import { ImgFallbackModule } from 'ngx-img-fallback';
     LoginPage,
     KapalPage,
     MapsPage,
-    NewsPage
+    NewsPage,
+    MdDetailPage
   ],
   providers: [
     StatusBar,
