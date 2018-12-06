@@ -1,0 +1,45 @@
+page-login {
+  ion-content{
+	background-color: #488aff !important;
+  }
+  .logo{
+  	color:white;
+  	font-size: 40px;
+  }
+  .sub-logo{
+  	color:white;
+  	font-size: 1.8rem;
+  	font-weight: 700;
+  }
+  .spacer{
+  	height: 10px;
+  }
+  .paragraph{
+  	color:white;
+  }
+  .paragraph-mini{
+  	color:white;
+  	font-size:0.8rem !important;
+  }
+  button{
+  	margin-bottom: 15px !important;
+  }
+  .spacer-mini{
+  	height: 20px;
+  }
+  input[type=text], input[type=password], input[type="email"]{
+		background-color: #F6F6F6;
+		border : none;
+		padding:15px 15px;
+		text-decoration: none;
+		font-size: 14px;
+		margin: 5px;
+		width: 100%;
+		border: 2px solid #F6F6F6;
+		//transition: all 0.5s ease-in-out;
+		height: 40px;
+		margin: 0 auto;
+		margin-bottom: 5px;
+    border-radius: 10px;
+	}
+}

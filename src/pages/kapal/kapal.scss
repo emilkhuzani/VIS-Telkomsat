@@ -1,0 +1,46 @@
+page-kapal {
+  
+
+  .card-background-page {
+    ion-card {
+      position: relative;
+    }
+    .card-container{
+  	  width:100%;
+  	  background-image: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0.0));
+  	  position: absolute;
+  	  bottom: 0px;
+  	  height: auto;
+  	  padding:10px;
+  	  padding-top: 70px;
+    }
+    .card-title {
+      font-size: 1.5em;
+      width: 100%;
+      font-weight: bold;
+      color: #fff;
+    }
+    .card-subtitle {
+      font-size: 1.0em;
+      width: 100%;
+      color: #fff;
+      padding-top: 10px;
+    }
+    .tombol{
+      position: absolute;
+      top:5px;
+      right: 5px;
+      img{
+        width:70px;
+      }
+    }
+    .tombol-love{
+      position: absolute;
+      top:38px;
+      right: 5px;
+      img{
+        width:70px;
+      }
+    }
+  }
+}

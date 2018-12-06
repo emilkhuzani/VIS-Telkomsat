@@ -1,17 +1,37 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Home</ion-title>
+  <ion-navbar color="primary"> 
+    <ion-title>VIS Telkomsat</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+<ion-content>
+  <ion-slides *ngIf="datas && datas.length" pager autoplay="5000" loop="true" speed="1000">
+    <ion-slide *ngFor="let item of datas">
+      <img src="http://vis.patrakom.co.id/produk/{{item.gambar_produk}}" class="img-product">
+    </ion-slide>
+  </ion-slides>
+  <ion-item-divider color="light" style="margin-top: -5px;"><b>Favorit Vessel</b></ion-item-divider>
+  <ion-item *ngIf="!vessels" no-lines>
+    You not add any vassel on your favorit list
+  </ion-item>
+  <ion-slides slidesPerView="2.5" spaceBetween="10" *ngIf="vessels && vessels.length">
+    <ion-slide *ngFor="let vessel of vessels">
+      <div class="card-2">
+        <div class="wall-2" [style.backgroundImage]="'url('+vessel.foto+')'"></div>
+        <div class="card-container">
+          <div class="card-subtitle">{{vessel.nama_node}}</div>
+        </div>
+      </div>
+    </ion-slide>
+  </ion-slides>
+  <ion-item-divider color="light" style="margin-top: 5px;"><b>Top Maritime News</b></ion-item-divider>
+  <ion-list>
+    <ion-item *ngFor="let new of news">
+      <ion-avatar item-start>
+        <img src="http://vis.telkomsat.co.id/images_news/{{new.gambar_berita}}" src-fallback="../../assets/imgs/no-images/no-image-available.jpg"/>
+      </ion-avatar>
+      <h2>{{new.judul_berita}}</h2>
+      <p style="white-space: normal !important;">{{new.preview_berita}}</p>
+    </ion-item>
+  </ion-list>
 </ion-content>

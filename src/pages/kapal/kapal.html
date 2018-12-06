@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Vessel</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only><ion-icon name="contact"></ion-icon></button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content class="card-background-page">
+  <ion-card  *ngFor="let vessel of datas">
+    <!--<img src="{{vessel.foto}}" src-fallback="../../assets/imgs/no-images/no-image-available.jpg"/>-->
+    <div style="width:100%;height: 250px;background-image: url('../../assets/imgs/no-images/no-image-available.jpg');background-size: cover;background-position: center center;">
+    <div style="width:100%;height: 250px;background-position: center center;background-size:cover;" [style.backgroundImage]="'url('+vessel.foto+')'"></div>
+    </div>
+    <div class="tombol">
+      <button ion-button round small  icon-start icon-only color="danger" (click)="addBasket(vessel.nama_node)"><ion-icon name="pin"></ion-icon></button>
+    </div>
+    <div class="card-container" (click)="goDetail()">
+      <div class="card-title">{{vessel.nama_node}}</div>
+      <div class="card-subtitle">{{vessel.nama_pelanggan}}</div>
+    </div>
+  </ion-card>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+   <ion-infinite-scroll-content></ion-infinite-scroll-content>
+ </ion-infinite-scroll>
+</ion-content>

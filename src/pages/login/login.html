@@ -1,0 +1,22 @@
+<ion-header no-border>
+  <ion-navbar transparent color="danger">
+    <ion-title></ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding full-screen text-center>
+  <div padding>
+  	<div padding>
+	  <h3 class="logo">VIS</h3>
+	  <p class="sub-logo">Vessel Information System</p>
+	  <div class="spacer"></div>
+	  <p class="paragraph-mini">Enter your email and password to start session</p>
+	  <div class="spacer-mini"></div>
+	  <form [formGroup]="formgroup" (ngSubmit)="doLogin()">
+	    <input type="email" placeholder="Email" formControlName="email" [(ngModel)]="txtemail">
+	    <input type="password" placeholder="Password" formControlName="password" [(ngModel)]="txtpassword">
+	    <div class="spacer"></div>
+	    <button ion-button round block color="secondary" [disabled]="!formgroup.valid"> Login </button>
+	  </form>
+	</div>
+  </div>
+</ion-content>
