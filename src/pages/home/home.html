@@ -1,6 +1,9 @@
 <ion-header>
   <ion-navbar color="primary"> 
     <ion-title>VIS Telkomsat</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only><ion-icon name="contact"></ion-icon></button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -15,7 +18,7 @@
     You not add any vassel on your favorit list
   </ion-item>
   <ion-slides slidesPerView="2.5" spaceBetween="10" *ngIf="vessels && vessels.length">
-    <ion-slide *ngFor="let vessel of vessels">
+    <ion-slide *ngFor="let vessel of vessels" (click)="goDetail(vessel.id_node,vessel.nama_node)">
       <div class="card-2">
         <div class="wall-2" [style.backgroundImage]="'url('+vessel.foto+')'"></div>
         <div class="card-container">
@@ -26,7 +29,7 @@
   </ion-slides>
   <ion-item-divider color="light" style="margin-top: 5px;"><b>Top Maritime News</b></ion-item-divider>
   <ion-list>
-    <ion-item *ngFor="let new of news">
+    <ion-item *ngFor="let new of news" (click)="goDetailBerita(new.id_berita)">
       <ion-avatar item-start>
         <img src="http://vis.telkomsat.co.id/images_news/{{new.gambar_berita}}" src-fallback="../../assets/imgs/no-images/no-image-available.jpg"/>
       </ion-avatar>

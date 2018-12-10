@@ -13,12 +13,14 @@ import { WelcomePage } from '../pages/welcome/welcome';
 import { LoginPage } from '../pages/login/login';
 import { MapsPage } from '../pages/maps/maps';
 import { NewsPage } from '../pages/news/news';
-
+import { DetailPage } from '../pages/detail/detail';
 import { MdDetailPage } from '../pages/md-detail/md-detail';
+import { DetailBeritaPage } from '../pages/detail-berita/detail-berita';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { ImgFallbackModule } from 'ngx-img-fallback';
+import { HiddenBarDirective } from '../directives/hidden-bar/hidden-bar';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,9 @@ import { ImgFallbackModule } from 'ngx-img-fallback';
     MapsPage,
     NewsPage,
     MdDetailPage,
+    DetailPage,
+    DetailBeritaPage,
+    HiddenBarDirective
   ],
   imports: [
     BrowserModule,
@@ -52,7 +57,9 @@ import { ImgFallbackModule } from 'ngx-img-fallback';
     KapalPage,
     MapsPage,
     NewsPage,
-    MdDetailPage
+    MdDetailPage,
+    DetailBeritaPage,
+    DetailPage
   ],
   providers: [
     StatusBar,

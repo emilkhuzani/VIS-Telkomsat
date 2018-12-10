@@ -4,6 +4,8 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/timeout';
 
+import { DetailPage } from '../detail/detail';
+
 @Component({
   selector: 'page-kapal',
   templateUrl: 'kapal.html',
@@ -36,7 +38,7 @@ export class KapalPage {
             "id_node":this.vessels[i].id_node,
             "nama_node":this.vessels[i].nama_node,
             "nama_pelanggan":this.vessels[i].owner,
-            "foto": "http://vis.telkomsat.co.id/images_backup/"+this.vessels[i].foto,
+            "foto": encodeURI("http://vis.telkomsat.co.id/images_backup/"+this.vessels[i].foto),
           })
         
       }
@@ -63,7 +65,7 @@ export class KapalPage {
               "id_node":data.records[i].id_node,
               "nama_node":data.records[i].nama_node,
               "nama_pelanggan":data.records[i].owner,
-              "foto": "http://vis.telkomsat.co.id/images_backup/"+data.records[i].foto,
+              "foto": encodeURI("http://vis.telkomsat.co.id/images_backup/"+data.records[i].foto),
             })
           }
         }
@@ -73,6 +75,10 @@ export class KapalPage {
       });
       infiniteScroll.complete();
     }, 500);
+  }
+
+  goDetail(id_node,nama_node){
+    this.navCtrl.push(DetailPage, {id_node:id_node,nama_node:nama_node}, {animate:true,direction:'forward'});
   }
 
   ionViewDidLoad() {

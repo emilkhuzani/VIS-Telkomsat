@@ -1,0 +1,29 @@
+page-detail-berita {
+  ion-content{
+    background-size: 100%;
+  }
+  .judul-berita{
+  	font-size: 1.5em;
+  	margin-top: -48px !important;
+  	width: 100%;
+  	p{
+  	  font-size: .5em;
+  	  font-weight: bold;
+  	}
+  }
+  .no-image{
+  	width: 100%;
+  	height: 250px;
+  	background: url('../../assets/imgs/no-images/no-image-available.jpg') no-repeat center center;
+  	background-size: cover;
+  }
+  .foto-kapal{
+  	width: 100%;
+  	height: 250px;
+    background-position: center center;
+    background-size: cover;
+  }
+  .berita{
+    text-align: justify;
+  }
+}

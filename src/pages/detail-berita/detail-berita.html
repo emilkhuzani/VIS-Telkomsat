@@ -1,0 +1,23 @@
+<ion-header #head>
+  <ion-navbar color="primary">
+    <ion-title></ion-title>
+    <ion-buttons end icon-only>
+      <button ion-button>
+      	<ion-icon name="share"></ion-icon>
+      </button>
+      <button ion-button icon-only><ion-icon name="contact"></ion-icon></button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content hidden-bar [header]="head" fullscreen>
+  <div padding class="judul-berita">
+  	<h3>{{judul_berita}}</h3>
+  	<p>{{sumber_berita}}</p>
+  </div>
+  <div class="no-image">
+  	<div class="foto-kapal" [style.backgroundImage]="'url('+gambar_berita+')'"></div>
+  </div>
+  <div padding [innerHTML]="isi_berita" class="berita"></div>
+</ion-content>

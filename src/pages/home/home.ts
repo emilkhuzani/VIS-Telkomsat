@@ -3,6 +3,8 @@ import { NavController, LoadingController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/timeout';
+import { DetailPage } from '../detail/detail';
+import { DetailBeritaPage } from '../detail-berita/detail-berita';
 
 @Component({
   selector: 'page-home',
@@ -43,7 +45,7 @@ export class HomePage {
   	  for(let i = 0; i<data.records.length; i++){
         this.vessels.push({
           "nama_node":data.records[i].nama_node,
-          "foto": "http://vis.telkomsat.co.id/images_backup/"+data.records[i].foto,
+          "foto": encodeURI("http://vis.telkomsat.co.id/images_backup/"+data.records[i].foto),
         })
       }
   	}, err=>{
@@ -51,19 +53,28 @@ export class HomePage {
   }
 
   getBerita(){
-  	this.http.get('http://vis.telkomsat.co.id/api.vessel.tracking/berita/get_berita.php')
+  	this.http.get('http://vis.telkomsat.co.id/api.vessel.tracking/berita/get_berita_v2.php')
   	.timeout(10*1000)
   	.map(res=>res.json())
   	.subscribe(data=>{
   	  for(let i = 0; i<data.records.length; i++){
         this.news.push({
+          "id_berita":data.records[i].id_berita,
           "judul_berita":data.records[i].judul_berita,
           "preview_berita":data.records[i].preview_berita,
-          "gambar_berita":data.records[i].gambar_berita,
+          "gambar_berita":encodeURI(data.records[i].gambar_berita),
         })
       }
   	}, err=>{
   	})
+  }
+
+  goDetail(id_node,nama_node){
+    this.navCtrl.push(DetailPage,{id_node:id_node,nama_node:nama_node},{animate:true,direction:'forward'});
+  }
+
+  goDetailBerita(id_berita){
+    this.navCtrl.push(DetailBeritaPage,{id_berita:id_berita},{animate:true,direction:'forward'});
   }
 
 }

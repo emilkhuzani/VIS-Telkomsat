@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>{{nama_kapal}}</ion-title>
+    <ion-buttons end icon-only>
+      <button ion-button>
+      	<ion-icon name="share"></ion-icon>
+      </button>
+      <button ion-button icon-only><ion-icon name="contact"></ion-icon></button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <div class="no-image">
+  	<div class="foto-kapal" [style.backgroundImage]="'url('+foto+')'"></div>
+  </div>
+  <ion-item-divider color="light"><b>Vessel Control</b></ion-item-divider>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-4 text-center>
+        <img class="menu-image" src="../../assets/imgs/menu/distance.png">
+        <p>Distance</p>
+      </ion-col>
+      <ion-col col-4 text-center>
+        <img class="menu-image" src="../../assets/imgs/menu/time.png">
+        <p>Voyage</p>
+      </ion-col>
+      <ion-col col-4 text-center>
+        <img class="menu-image" src="../../assets/imgs/menu/anchor.png">
+        <p>Achoring</p>
+      </ion-col>
+      <ion-col col-4 text-center>
+        <img class="menu-image" src="../../assets/imgs/menu/map.png">
+        <p>Tracking</p>
+      </ion-col>
+      <ion-col col-4 text-center>
+        <img class="menu-image" src="../../assets/imgs/menu/maps-and-flags.png">
+        <p>Follow</p>
+      </ion-col>
+      <ion-col col-4 text-center>
+        <img class="menu-image" src="../../assets/imgs/menu/eye-tracking.png">
+        <p>Historical Data</p>
+      </ion-col>
+      <ion-col col-4 text-center>
+        <img class="menu-image" src="../../assets/imgs/menu/heart.png">
+        <p>Add Favorit</p>
+      </ion-col>
+      <ion-col col-4 text-center>
+        <img class="menu-image" src="../../assets/imgs/menu/heartnon.png">
+        <p>Remove Favorit</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+</ion-content>

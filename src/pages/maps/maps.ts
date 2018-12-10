@@ -1,9 +1,10 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, AlertController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, AlertController, ActionSheetController} from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/timeout';
 import { MdDetailPage } from '../md-detail/md-detail';
+import { DetailPage } from '../detail/detail';
 declare var google, MarkerClusterer;
 
 @IonicPage()
@@ -19,7 +20,7 @@ export class MapsPage {
   markers:any=[];
   id_user:any;
   markerCluster:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private http:Http, public alertCtlr : AlertController, private modalCtlr:ModalController ) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private http:Http, public alertCtlr : AlertController, private modalCtlr:ModalController, private actionSheet:ActionSheetController ) {
     this.id_user=localStorage.getItem('id_vis');
   	
   }
@@ -70,8 +71,31 @@ export class MapsPage {
         let nama_node = this.locations[i].node_name;
         let id_node = this.locations[i].host_id;
         google.maps.event.addListener(marker, 'click', () =>{
-          let modal = this.modalCtlr.create(MdDetailPage,{nama_node:nama_node,id_node:id_node});
-          modal.present();
+          //this.map.panTo(this.markers.getPosition());
+          //let modal = this.modalCtlr.create(MdDetailPage,{nama_node:nama_node,id_node:id_node});
+          //modal.present();
+          let action = this.actionSheet.create({
+            title : nama_node,
+            buttons: [
+            {
+              text: 'Detail Vessel',
+              icon: 'boat',
+              handler: () => {
+                this.navCtrl.push(DetailPage, {id_node:id_node,nama_node:nama_node},{animate:true, direction:'forward'});
+                console.log('Destructive clicked');
+              }
+            },
+            {
+              text: 'Cancel',
+              role: 'cancel',
+              icon: 'close',
+              handler: () => {
+                console.log('Cancel clicked');
+              }
+            }
+          ]
+          });
+          action.present();
         });
         this.markers.push(marker);
   	  }
