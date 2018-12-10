@@ -44,6 +44,7 @@ export class HomePage {
   	.subscribe(data=>{
   	  for(let i = 0; i<data.records.length; i++){
         this.vessels.push({
+          "id_node":data.records[i].id_node,
           "nama_node":data.records[i].nama_node,
           "foto": encodeURI("http://vis.telkomsat.co.id/images_backup/"+data.records[i].foto),
         })

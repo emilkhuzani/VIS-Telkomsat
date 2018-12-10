@@ -16,6 +16,9 @@ import { NewsPage } from '../pages/news/news';
 import { DetailPage } from '../pages/detail/detail';
 import { MdDetailPage } from '../pages/md-detail/md-detail';
 import { DetailBeritaPage } from '../pages/detail-berita/detail-berita';
+import { MorePage } from '../pages/more/more';
+import { FaqPage } from '../pages/faq/faq';
+import { HelpPage } from '../pages/help/help';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -37,6 +40,9 @@ import { HiddenBarDirective } from '../directives/hidden-bar/hidden-bar';
     MdDetailPage,
     DetailPage,
     DetailBeritaPage,
+    MorePage,
+    FaqPage,
+    HelpPage,
     HiddenBarDirective
   ],
   imports: [
@@ -59,7 +65,10 @@ import { HiddenBarDirective } from '../directives/hidden-bar/hidden-bar';
     NewsPage,
     MdDetailPage,
     DetailBeritaPage,
-    DetailPage
+    DetailPage,
+    MorePage,
+    HelpPage,
+    FaqPage
   ],
   providers: [
     StatusBar,

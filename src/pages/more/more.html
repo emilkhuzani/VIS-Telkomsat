@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>More</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only><ion-icon name="contact"></ion-icon></button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-list no-lines>
+    <ion-item-divider color="light"></ion-item-divider>
+    <button ion-item (click)="goAbout()">
+      About VIS
+    </button>
+    <ion-item-divider color="light"></ion-item-divider>
+    <button ion-item (click)="goFaq()">
+      F.A.Q
+    </button>
+    <ion-item-divider color="light"></ion-item-divider>
+    <button ion-item (click)="goHelp()">
+      Help
+    </button>
+    <ion-item-divider color="light"></ion-item-divider>
+  </ion-list>
+</ion-content>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { AboutPage } from '../about/about';
+import { MorePage } from '../more/more';
 import { ContactPage } from '../contact/contact';
 import { HomePage } from '../home/home';
 import { KapalPage } from '../kapal/kapal';
@@ -16,7 +16,7 @@ export class TabsPage {
   boat = KapalPage;
   news = NewsPage;
   map = MapsPage;
-  more = AboutPage;
+  more = MorePage;
 
   constructor() {
 
