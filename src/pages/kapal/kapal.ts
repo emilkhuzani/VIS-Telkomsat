@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, App } from 'ionic-angular';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/timeout';
 
 import { DetailPage } from '../detail/detail';
+import { FollowVesselPage } from '../follow-vessel/follow-vessel';
 
 @Component({
   selector: 'page-kapal',
@@ -14,7 +15,7 @@ export class KapalPage {
   vessels:any;
   datas:any[]=[];
   lastId:any='';
-  constructor(public navCtrl: NavController, public navParams: NavParams, private http:Http, private loadingCtlr:LoadingController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private http:Http, private loadingCtlr:LoadingController, private app : App) {
   	this.getVessel();
   }
 
@@ -77,8 +78,12 @@ export class KapalPage {
     }, 500);
   }
 
+  followVessel(nama_node,id_node){
+    this.app.getRootNav().push(FollowVesselPage,{id_node:id_node,nama_node:nama_node},{animate:true, direction:'forward'});
+  }
+
   goDetail(id_node,nama_node){
-    this.navCtrl.push(DetailPage, {id_node:id_node,nama_node:nama_node}, {animate:true,direction:'forward'});
+    this.app.getRootNav().push(DetailPage, {id_node:id_node,nama_node:nama_node}, {animate:true,direction:'forward'});
   }
 
   ionViewDidLoad() {

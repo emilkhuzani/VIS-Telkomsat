@@ -1,34 +1,32 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, AlertController, ActionSheetController,App, LoadingController} from 'ionic-angular';
+import { Component,ViewChild, ElementRef } from '@angular/core';
+import { IonicPage, NavController, NavParams, ActionSheetController, AlertController, App } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/timeout';
-import { MdDetailPage } from '../md-detail/md-detail';
 import { DetailPage } from '../detail/detail';
-declare var google, MarkerClusterer;
+declare var google;
 
 @IonicPage()
 @Component({
-  selector: 'page-maps',
-  templateUrl: 'maps.html',
+  selector: 'page-follow-vessel',
+  templateUrl: 'follow-vessel.html',
 })
-export class MapsPage {
-
+export class FollowVesselPage {
   @ViewChild('map') mapElement:ElementRef;
   map:any;
   locations:any;
   markers:any=[];
-  id_user:any;
-  markerCluster:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private http:Http, public alertCtlr : AlertController, private modalCtlr:ModalController, private actionSheet:ActionSheetController, private app:App, private loadingCtlr:LoadingController ) {
-    this.id_user=localStorage.getItem('id_vis');
-  	
+  id_node:any;
+  nama_node:string;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private http:Http, private actionSheet: ActionSheetController, private alertCtlr:AlertController, private app:App) {
+  	this.id_node=this.navParams.get('id_node');
+  	this.nama_node=this.navParams.get('nama_node');
   }
 
   ionViewDidLoad() {
+    console.log('ionViewDidLoad FollowVesselPage');
     this.showMap();
     this.getPosition();
-    this.refreshMarker();
   }
 
   showMap(){
@@ -46,12 +44,14 @@ export class MapsPage {
 
   getPosition(){
   	let marker;
-  	this.http.get('http://vis.telkomsat.co.id/api.vessel.tracking/vessel/marker_v3_second.php?id_user='+this.id_user)
+  	this.http.get('http://vis.telkomsat.co.id/api.vessel.tracking/vessel/follow_ship_v3.php?id_kapal='+this.id_node)
   	.timeout(10*1000)
   	.map(res=>res.json())
   	.subscribe(data=>{
   	  this.locations = data.locations;
   	  for(let i=0;i<this.locations.length;i++){
+  	  	let latLng = new google.maps.LatLng(this.locations[i].lat, this.locations[i].lng);
+        this.map.panTo(latLng);
   	  	marker = new google.maps.Marker({
 	        position: new google.maps.LatLng(this.locations[i].lat,this.locations[i].lng),
 	        map: this.map,
@@ -96,7 +96,6 @@ export class MapsPage {
         });
         this.markers.push(marker);
   	  }
-  	  this.markerCluster = new MarkerClusterer(this.map, this.markers,{imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
   	}, err=>{
   	  let alert = this.alertCtlr.create({
         title : "Error",
@@ -106,17 +105,6 @@ export class MapsPage {
   	  alert.present();
   	});
   	
-  }
-
-  refreshMarker(){
-  	setInterval(() => {
-  	  for (let i=0;i<this.markers.length;i++){
-  	  	this.markers[i].setMap(null);
-  	  	this.markerCluster.clearMarkers();
-  	  }
-  	  this.markers=[];
-      this.getPosition();
-    }, 60*1000);
   }
 
 }

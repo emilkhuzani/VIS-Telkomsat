@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the FaqPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/timeout';
 
 @IonicPage()
 @Component({
@@ -14,12 +10,30 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'faq.html',
 })
 export class FaqPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  faq:any;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private http:Http, private loadingCtlr:LoadingController) {
+  	this.getFaq();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FaqPage');
+  }
+
+  getFaq(){
+    let loading = this.loadingCtlr.create({
+      spinner : 'dots',
+      content : 'Please wait...',
+    });
+    loading.present();
+    this.http.get('http://vis.telkomsat.co.id/api.vessel.tracking/app/get_faq.php')
+    .timeout(3*1000)
+    .map(res=>res.json())
+    .subscribe(data=>{
+      loading.dismiss();
+      this.faq=data.faq;
+    },err=>{
+
+    })
   }
 
 }

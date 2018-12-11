@@ -1,0 +1,26 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Date Track</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="closeModal()">Close</button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-item-divider color='light'></ion-item-divider>
+  <ion-item>
+    <ion-label>Start Date</ion-label>
+    <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A"></ion-datetime>
+  </ion-item>
+  <ion-item>
+    <ion-label>End Date</ion-label>
+    <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A"></ion-datetime>
+  </ion-item>
+  <div padding class="div-button">
+  	<button ion-button color="primary" block>Track</button>
+  </div>
+</ion-content>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, App, LoadingController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/timeout';
@@ -15,7 +15,7 @@ export class NewsPage {
   news:any[]=[];
   lastId:any='';
   beritas:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private http:Http) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private http:Http, private app:App, private loadingCtlr:LoadingController) {
   	this.getBerita();
   }
 
@@ -24,10 +24,16 @@ export class NewsPage {
   }
 
   getBerita(){
+    let loading = this.loadingCtlr.create({
+      spinner : 'dots',
+      content : 'Please wait'
+    });
+    loading.present();
   	this.http.get('http://vis.telkomsat.co.id/api.vessel.tracking/berita/get_berita_v2.php?full=full&last_id=')
   	.timeout(10*1000)
   	.map(res=>res.json())
   	.subscribe(data=>{
+      loading.dismiss();
   	  this.beritas = data.records;
   	  let PanjangData = this.beritas.length;
   	  this.lastId = this.beritas[PanjangData-1].id_berita;
@@ -40,6 +46,7 @@ export class NewsPage {
         })
       }
   	}, err=>{
+      loading.dismiss();
   	})
   }
 
@@ -74,7 +81,7 @@ export class NewsPage {
   }
 
   goDetail(id_berita){
-    this.navCtrl.push(DetailBeritaPage,{id_berita:id_berita},{animate:true,direction:'forward'})
+    this.app.getRootNav().push(DetailBeritaPage,{id_berita:id_berita},{animate:true,direction:'forward'})
   }
 
 }

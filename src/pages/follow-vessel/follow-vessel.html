@@ -1,13 +1,11 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>F A Q</ion-title>
-    <ion-buttons end>
+    <ion-title>{{nama_node}}</ion-title>
+    <ion-buttons end icon-only>
       <button ion-button icon-only><ion-icon name="contact"></ion-icon></button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
-
-
-<ion-content padding>
-  <div [innerHTML]="faq" class="faq-div"></div>
+<ion-content>
+  <div #map id="map"></div>
 </ion-content>

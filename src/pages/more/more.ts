@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, App} from 'ionic-angular';
 import { AboutPage } from '../about/about';
 import { FaqPage } from '../faq/faq';
 import { HelpPage } from '../help/help';
@@ -11,7 +11,7 @@ import { HelpPage } from '../help/help';
 })
 export class MorePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private app:App) {
   }
 
   ionViewDidLoad() {
@@ -19,15 +19,15 @@ export class MorePage {
   }
 
   goAbout(){
-  	this.navCtrl.push(AboutPage,{},{animate:true,direction:'forward'});
+  	this.app.getRootNav().push(AboutPage,{},{animate:true,direction:'forward'});
   }
 
   goFaq(){
-  	this.navCtrl.push(FaqPage,{},{animate:true,direction:'forward'});
+  	this.app.getRootNav().push(FaqPage,{},{animate:true,direction:'forward'});
   }
 
   goHelp(){
-  	this.navCtrl.push(HelpPage,{},{animate:true,direction:'forward'});
+  	this.app.getRootNav().push(HelpPage,{},{animate:true,direction:'forward'});
   }
 
 }

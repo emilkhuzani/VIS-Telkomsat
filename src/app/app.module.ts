@@ -19,6 +19,9 @@ import { DetailBeritaPage } from '../pages/detail-berita/detail-berita';
 import { MorePage } from '../pages/more/more';
 import { FaqPage } from '../pages/faq/faq';
 import { HelpPage } from '../pages/help/help';
+import { DateTrackPage } from '../pages/date-track/date-track';
+import { WeekTrackPage } from '../pages/week-track/week-track';
+import { FollowVesselPage } from '../pages/follow-vessel/follow-vessel';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -43,6 +46,9 @@ import { HiddenBarDirective } from '../directives/hidden-bar/hidden-bar';
     MorePage,
     FaqPage,
     HelpPage,
+    DateTrackPage,
+    WeekTrackPage,
+    FollowVesselPage,
     HiddenBarDirective
   ],
   imports: [
@@ -68,7 +74,10 @@ import { HiddenBarDirective } from '../directives/hidden-bar/hidden-bar';
     DetailPage,
     MorePage,
     HelpPage,
-    FaqPage
+    FaqPage,
+    DateTrackPage,
+    WeekTrackPage,
+    FollowVesselPage
   ],
   providers: [
     StatusBar,

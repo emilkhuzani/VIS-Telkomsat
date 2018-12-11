@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController } from 'ionic-angular';
+import { NavController, LoadingController, App } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/timeout';
@@ -14,7 +14,7 @@ export class HomePage {
   datas:any;
   vessels:any[]=[];
   news:any[]=[];
-  constructor(public navCtrl: NavController, private http:Http, private loadingCtlr:LoadingController) {
+  constructor(public navCtrl: NavController, private http:Http, private loadingCtlr:LoadingController, private app:App) {
     this.getProduct();
     this.getFavorit();
     this.getBerita();
@@ -71,11 +71,11 @@ export class HomePage {
   }
 
   goDetail(id_node,nama_node){
-    this.navCtrl.push(DetailPage,{id_node:id_node,nama_node:nama_node},{animate:true,direction:'forward'});
+    this.app.getRootNav().push(DetailPage,{id_node:id_node,nama_node:nama_node},{animate:true,direction:'forward'});
   }
 
   goDetailBerita(id_berita){
-    this.navCtrl.push(DetailBeritaPage,{id_berita:id_berita},{animate:true,direction:'forward'});
+    this.app.getRootNav().push(DetailBeritaPage,{id_berita:id_berita},{animate:true,direction:'forward'});
   }
 
 }
