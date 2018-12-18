@@ -25,6 +25,7 @@ import { FollowVesselPage } from '../pages/follow-vessel/follow-vessel';
 import { TrackingPage } from '../pages/tracking/tracking';
 import { SensorPage } from '../pages/sensor/sensor';
 import { SubSensorPage } from '../pages/sub-sensor/sub-sensor';
+import { ModalResetPage } from '../pages/modal-reset/modal-reset';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -55,6 +56,7 @@ import { HiddenBarDirective } from '../directives/hidden-bar/hidden-bar';
     TrackingPage,
     SensorPage,
     SubSensorPage,
+    ModalResetPage,
     HiddenBarDirective
   ],
   imports: [
@@ -86,7 +88,8 @@ import { HiddenBarDirective } from '../directives/hidden-bar/hidden-bar';
     FollowVesselPage,
     TrackingPage,
     SensorPage,
-    SubSensorPage
+    SubSensorPage,
+    ModalResetPage
   ],
   providers: [
     StatusBar,

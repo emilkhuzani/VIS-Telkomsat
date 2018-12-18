@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController, ModalController } from 'ionic-angular';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/timeout';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 
 import { TabsPage } from '../tabs/tabs';
+import { ModalResetPage } from '../modal-reset/modal-reset';
 
 @IonicPage()
 @Component({
@@ -19,7 +20,7 @@ export class LoginPage {
   email:AbstractControl;
   password:AbstractControl;
   id_vis:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private formbuilder:FormBuilder, private loadingCtlr:LoadingController, private alertCtlr:AlertController, private http:Http ) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private formbuilder:FormBuilder, private loadingCtlr:LoadingController, private alertCtlr:AlertController, private http:Http, private modalCtlr:ModalController ) {
   	this.formgroup = formbuilder.group({
       email:['',Validators.compose([Validators.email,Validators.minLength(5),Validators.maxLength(50),Validators.required])],
       password:['',Validators.compose([Validators.required,Validators.minLength(3),Validators.maxLength(50)])],
@@ -88,7 +89,8 @@ export class LoginPage {
           {
             text: 'Reset Password',
             handler: () => {
-              
+              let modal = this.modalCtlr.create(ModalResetPage);
+              modal.present();
             }
           }
         ]

@@ -1,0 +1,26 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Reset Your Password</ion-title>
+    <ion-buttons end> 
+      <button ion-button (click)="closeModal()">Close</button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <form [formGroup]="formgroup" (ngSubmit)="doReset()">
+  <ion-item-divider color='light'></ion-item-divider>
+  <ion-item>
+  	<ion-label floating>Email Address</ion-label>
+    <ion-input type="email" formControlName="email" [(ngModel)]="txtemail"></ion-input>
+  </ion-item>
+
+  <div padding class="div-button">
+  	<p>*Insert your email address that already regitered on VIS</p>
+  	<button ion-button color="primary" block [disabled]="!formgroup.valid">Reset Password</button>
+  </div>
+  </form>
+</ion-content>
