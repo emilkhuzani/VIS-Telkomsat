@@ -22,6 +22,9 @@ import { HelpPage } from '../pages/help/help';
 import { DateTrackPage } from '../pages/date-track/date-track';
 import { WeekTrackPage } from '../pages/week-track/week-track';
 import { FollowVesselPage } from '../pages/follow-vessel/follow-vessel';
+import { TrackingPage } from '../pages/tracking/tracking';
+import { SensorPage } from '../pages/sensor/sensor';
+import { SubSensorPage } from '../pages/sub-sensor/sub-sensor';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -49,6 +52,9 @@ import { HiddenBarDirective } from '../directives/hidden-bar/hidden-bar';
     DateTrackPage,
     WeekTrackPage,
     FollowVesselPage,
+    TrackingPage,
+    SensorPage,
+    SubSensorPage,
     HiddenBarDirective
   ],
   imports: [
@@ -77,7 +83,10 @@ import { HiddenBarDirective } from '../directives/hidden-bar/hidden-bar';
     FaqPage,
     DateTrackPage,
     WeekTrackPage,
-    FollowVesselPage
+    FollowVesselPage,
+    TrackingPage,
+    SensorPage,
+    SubSensorPage
   ],
   providers: [
     StatusBar,

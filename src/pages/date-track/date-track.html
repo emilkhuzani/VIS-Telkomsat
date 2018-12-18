@@ -11,16 +11,18 @@
 
 
 <ion-content>
+  <form [formGroup]="formgroup" (ngSubmit)="doTracking()">
   <ion-item-divider color='light'></ion-item-divider>
   <ion-item>
     <ion-label>Start Date</ion-label>
-    <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A"></ion-datetime>
+    <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="DDDD MMM YYYY" formControlName="start" [(ngModel)]="txtstart"></ion-datetime>
   </ion-item>
   <ion-item>
     <ion-label>End Date</ion-label>
-    <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A"></ion-datetime>
+    <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="DDDD MMM YYYY" formControlName="end" [(ngModel)]="txtend"></ion-datetime>
   </ion-item>
   <div padding class="div-button">
-  	<button ion-button color="primary" block>Track</button>
+  	<button ion-button color="primary" block [disabled]="!formgroup.valid">Track</button>
   </div>
+  </form>
 </ion-content>

@@ -60,8 +60,8 @@ export class LoginPage {
     },err=>{
       loading.dismiss();
       let alert = this.alertCtlr.create({
-        title : 'Network Error',
-        message : 'Internet connection lost, please try again',
+        title : 'Error',
+        message : 'Login failed, please try again',
         buttons : ['Ok'],
       });
       alert.present();
@@ -71,6 +71,29 @@ export class LoginPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
+  }
+
+  forgotPassword(){
+    let alert = this.alertCtlr.create({
+        title : 'Are You Sure?',
+        message : 'Do you want to reset your password? we will send email to you, and please follow the step on it',
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+            }
+          },
+          {
+            text: 'Reset Password',
+            handler: () => {
+              
+            }
+          }
+        ]
+      });
+      alert.present();
   }
 
 }

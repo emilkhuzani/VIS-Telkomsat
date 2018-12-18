@@ -36,11 +36,11 @@ export class HelpPage {
   doHelp(){
     let loading = this.loadingCtlr.create({
       spinner : 'dots',
-      content : 'Please wait...'
+      content : 'Send message to server...'
     });
     loading.present();
     this.http.get('http://vis.telkomsat.co.id/api.vessel.tracking/app/hubungi.php?id_user='+localStorage.getItem('id_vis')+'&telpon='+this.txtphone+'&subjek='+this.txtsubject+'&pesan='+this.txtmessage)
-    .timeout(3*1000)
+    .timeout(10*1000)
     .map(res=>res.json())
     .subscribe(data=>{
 	  loading.dismiss();
@@ -54,7 +54,7 @@ export class HelpPage {
       loading.dismiss();
       let alert = this.alertCtlr.create({
 	  	title : 'Error',
-	  	message : 'internet connection lost, please try again',
+	  	message : 'Something wrong when sending message to server',
 	  	buttons : ['Ok'],
 	  });
 	  alert.present()

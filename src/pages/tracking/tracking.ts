@@ -1,5 +1,5 @@
-import { Component,ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { Component, ViewChild, ElementRef } from '@angular/core';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController} from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/timeout';
@@ -7,10 +7,10 @@ declare var google;
 
 @IonicPage()
 @Component({
-  selector: 'page-week-track',
-  templateUrl: 'week-track.html',
+  selector: 'page-tracking',
+  templateUrl: 'tracking.html',
 })
-export class WeekTrackPage {
+export class TrackingPage {
   @ViewChild('map') mapElement:ElementRef;
   map:any;
   locations:any;
@@ -22,13 +22,17 @@ export class WeekTrackPage {
   lastLongitude:any;
   firstLatitude:any;
   firstLongitude:any;
+  start:any;
+  end:any;
   constructor(public navCtrl: NavController, public navParams: NavParams, private http:Http, private loadingCtlr:LoadingController, private alertCtlr:AlertController) {
   	this.id_node=this.navParams.get('id_node');
   	this.nama_node=this.navParams.get('nama_node');
+  	this.start=this.navParams.get('start');
+  	this.end=this.navParams.get('end');
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad WeekTrackPage');
+    console.log('ionViewDidLoad TrackingPage');
     this.showMap();
     this.getMarker();
   }
@@ -61,7 +65,7 @@ export class WeekTrackPage {
       origin: new google.maps.Point(0, 0),
       anchor: new google.maps.Point(3.5,3.5)
     };
-    this.http.get('http://vis.telkomsat.co.id/api.vessel.tracking/vessel/history_marker.php?id_node='+this.id_node)
+    this.http.get('http://vis.telkomsat.co.id/api.vessel.tracking/vessel/tracking_vessel_v3.php?id_kapal='+this.id_node+'&start='+this.start+'&stop='+this.end)
     .timeout(15*1000)
     .map(res=>res.json())
     .subscribe(data=>{

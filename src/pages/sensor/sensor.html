@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Engine Performance {{nama_node}}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-grid>
+  	<ion-row text-center>
+  	  <ion-col col-4 *ngFor="let sensor of datas">
+  	  	<div *ngIf="sensor.have_sub=='ya'" (click)="openSub(sensor.id_sensor,sensor.name_sensor)">
+  	  	  <img class="menu-image" src="{{sensor.gambar_sensor}}">
+          <p>{{sensor.name_sensor}}</p>
+        </div>
+        <div *ngIf="sensor.have_sub!='ya'" (click)="openMenu(sensor.name_sensor, sensor.hasil, sensor.satuan_sensor)">
+  	  	  <img class="menu-image" src="{{sensor.gambar_sensor}}">
+          <p>{{sensor.name_sensor}}</p>
+        </div>
+  	  </ion-col>
+  	</ion-row>
+  </ion-grid>
+</ion-content>

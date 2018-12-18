@@ -70,6 +70,7 @@ export class MapsPage {
         });
         let nama_node = this.locations[i].node_name;
         let id_node = this.locations[i].host_id;
+        let last_seen = this.locations[i].status_poll;
         google.maps.event.addListener(marker, 'click', () =>{
           let action = this.actionSheet.create({
             title : nama_node,
@@ -77,6 +78,14 @@ export class MapsPage {
             {
               text: 'Detail Vessel',
               icon: 'boat',
+              handler: () => {
+                this.app.getRootNav().push(DetailPage, {id_node:id_node,nama_node:nama_node},{animate:true, direction:'forward'});
+                console.log('Destructive clicked');
+              }
+            },
+            {
+              text: last_seen,
+              icon: 'eye',
               handler: () => {
                 this.app.getRootNav().push(DetailPage, {id_node:id_node,nama_node:nama_node},{animate:true, direction:'forward'});
                 console.log('Destructive clicked');
@@ -98,14 +107,37 @@ export class MapsPage {
   	  }
   	  this.markerCluster = new MarkerClusterer(this.map, this.markers,{imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
   	}, err=>{
-  	  let alert = this.alertCtlr.create({
-        title : "Error",
-        message : "Internet connection lost",
-        buttons : ['Ok'],
-  	  });
-  	  alert.present();
+      let alert = this.alertCtlr.create({
+        title : 'Error',
+        message : 'Cannt retrieve vessels data from server',
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+            }
+          },
+          {
+            text: 'Try Again',
+            handler: () => {
+              this.getPosition();
+            }
+          }
+        ]
+      });
+      alert.present();
   	});
   	
+  }
+
+  refresh(){
+    for (let i=0;i<this.markers.length;i++){
+        this.markers[i].setMap(null);
+        this.markerCluster.clearMarkers();
+    }
+    this.markers=[];
+    this.getPosition();
   }
 
   refreshMarker(){

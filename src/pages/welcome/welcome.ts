@@ -39,7 +39,7 @@ export class WelcomePage {
   }
 
   insertId(){
-    localStorage.setItem('id_vis','1');
+    //localStorage.setItem('id_vis','1');
   }
 
   ionViewDidLoad() {

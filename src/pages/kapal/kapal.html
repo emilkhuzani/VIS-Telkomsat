@@ -2,11 +2,14 @@
   <ion-navbar color="primary">
     <ion-title>Vessel</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only><ion-icon name="contact"></ion-icon></button>
+      <button ion-button icon-only><ion-icon name="search"></ion-icon></button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 <ion-content class="card-background-page">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content refreshingText="Please wait..." ></ion-refresher-content>
+  </ion-refresher>
   <ion-card  *ngFor="let vessel of datas">
     <div style="width:100%;height: 250px;background-image: url('../../assets/imgs/no-images/no-image-available.jpg');background-size: cover;background-position: center center;">
     <div style="width:100%;height: 250px;background-position: center center;background-size:cover;" [style.backgroundImage]="'url('+vessel.foto+')'"></div>
@@ -20,6 +23,6 @@
     </div>
   </ion-card>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-   <ion-infinite-scroll-content></ion-infinite-scroll-content>
- </ion-infinite-scroll>
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

@@ -98,11 +98,25 @@ export class FollowVesselPage {
   	  }
   	}, err=>{
   	  let alert = this.alertCtlr.create({
-        title : "Error",
-        message : "Internet connection lost",
-        buttons : ['Ok'],
-  	  });
-  	  alert.present();
+        title : 'Error',
+        message : 'Cannt retrive data from server',
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+            }
+          },
+          {
+            text: 'Try Again',
+            handler: () => {
+              this.getPosition();
+            }
+          }
+        ]
+      })
+      alert.present();
   	});
   	
   }

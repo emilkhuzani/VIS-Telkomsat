@@ -5,13 +5,15 @@
       <button ion-button>
       	<ion-icon name="share"></ion-icon>
       </button>
-      <button ion-button icon-only><ion-icon name="contact"></ion-icon></button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content refreshingText="Please wait..." ></ion-refresher-content>
+  </ion-refresher>
   <div class="no-image">
   	<div class="foto-kapal" [style.backgroundImage]="'url('+foto+')'"></div>
   </div>
@@ -25,6 +27,10 @@
       <ion-col col-4 text-center (click)="openSheet('VOYAGE',journey,'Hour')">
         <img class="menu-image" src="../../assets/imgs/menu/time.png">
         <p>Voyage</p>
+      </ion-col>
+      <ion-col col-4 text-center (click)="openSheet('SPEED',speed,'Mph / Day')">
+        <img class="menu-image" src="../../assets/imgs/menu/speedometer.png">
+        <p>Speed</p>
       </ion-col>
       <ion-col col-4 text-center (click)="openSheet('ANCHORING',anchoring,'Hour')">
         <img class="menu-image" src="../../assets/imgs/menu/anchor.png">
@@ -41,6 +47,10 @@
       <ion-col col-4 text-center (click)="openModal()">
         <img class="menu-image" src="../../assets/imgs/menu/eye-tracking.png">
         <p>Historical Data</p>
+      </ion-col>
+      <ion-col col-4 text-center *ngIf="sensor=='ya'" (click)="goSensor()">
+        <img class="menu-image" src="../../assets/imgs/menu/piston.png">
+        <p>Engine</p>
       </ion-col>
       <ion-col col-4 text-center *ngIf="favorit" (click)="addFavorit()">
         <img class="menu-image" src="../../assets/imgs/menu/heart.png">

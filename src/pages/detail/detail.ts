@@ -7,6 +7,7 @@ import 'rxjs/add/operator/timeout';
 import { DateTrackPage } from '../date-track/date-track';
 import { WeekTrackPage } from '../week-track/week-track';
 import { FollowVesselPage } from '../follow-vessel/follow-vessel';
+import { SensorPage } from '../sensor/sensor';
 @Component({
   selector: 'page-detail',
   templateUrl: 'detail.html',
@@ -20,6 +21,7 @@ export class DetailPage {
   journey:string;
   speed:string;
   anchoring:string;
+  sensor:string;
   constructor(public navCtrl: NavController, public navParams: NavParams, private http:Http, private loadingCtlr:LoadingController, private alertCtlr:AlertController, private actionSheet : ActionSheetController, private modalCtlr:ModalController) {
   	this.nama_kapal = this.navParams.get('nama_node');
   	this.id_node = this.navParams.get('id_node');
@@ -35,28 +37,50 @@ export class DetailPage {
   getDetail(){
     let loading = this.loadingCtlr.create({
       spinner : 'dots',
-      content : 'Please wait...',
+      content : 'Retrieving vessel data from server...',
     });  
     loading.present();
     this.http.get('http://vis.telkomsat.co.id/api.vessel.tracking/vessel/detail_v3.php?id_node='+this.id_node)
-    .timeout(3*1000)
+    .timeout(10*1000)
     .map(res=>res.json())
     .subscribe(data=>{
       loading.dismiss();
+      this.sensor=data.sensor;
       this.foto=encodeURI('http://vis.telkomsat.co.id/images_backup/'+data.foto);
     },err=>{
       loading.dismiss();
+      let alert = this.alertCtlr.create({
+        title : 'Error',
+        message : 'Cannt retrieve vessel data from server',
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+
+            }
+          },
+          {
+            text: 'Try Again',
+            handler: () => {
+              this.getDetail();
+            }
+          }
+        ]
+      });
+      alert.present();
     })
   }
 
   getVoyage(){
     let loading = this.loadingCtlr.create({
       spinner : 'dots',
-      content : 'Please wait...',
+      content : 'Calculating voyage data...',
     });  
     loading.present();
     this.http.get('http://vis.telkomsat.co.id/api.vessel.tracking/vessel/history_voyage.php?id_node='+this.id_node)
-    .timeout(3*1000)
+    .timeout(10*1000)
     .map(res=>res.json())
     .subscribe(data=>{
       loading.dismiss();
@@ -66,6 +90,26 @@ export class DetailPage {
       this.anchoring = data.lama_anchor;
     },err=>{
       loading.dismiss();
+      let alert = this.alertCtlr.create({
+        title : 'Error',
+        message : 'Something wrong when calculating data on server',
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+            }
+          },
+          {
+            text: 'Try Again',
+            handler: () => {
+              this.getVoyage();
+            }
+          }
+        ]
+      });
+      alert.present();
     });
   }
 
@@ -159,13 +203,13 @@ export class DetailPage {
   }
 
   openModal(){
-    let modal = this.modalCtlr.create(DateTrackPage,{id_node:this.id_node});
+    let modal = this.modalCtlr.create(DateTrackPage,{id_node:this.id_node,nama_node:this.nama_kapal});
     modal.present();
   }
 
   cekFavorit(){
     this.http.get('http://vis.telkomsat.co.id/api.vessel.tracking/user/cek_favorit.php?id_node='+this.id_node+'&id_user='+localStorage.getItem('id_vis'))
-    .timeout(3*1000)
+    .timeout(10*1000)
     .map(res=>res.json())
     .subscribe(data=>{
       if(data.hasil_cek=='tidakada'){
@@ -174,7 +218,26 @@ export class DetailPage {
         this.favorit = false;
       }
     },err=>{
-
+      let alert = this.alertCtlr.create({
+        title : 'Error',
+        message : 'Cannt retrieve favorit vessel data from server',
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+            }
+          },
+          {
+            text: 'Try Again',
+            handler: () => {
+              this.cekFavorit();
+            }
+          }
+        ]
+      });
+      alert.present();
     });
   }
 
@@ -185,7 +248,7 @@ export class DetailPage {
     });  
     loading.present();
     this.http.get('http://vis.telkomsat.co.id/api.vessel.tracking/user/tambah_favorit.php?id_node='+this.id_node+'&id_user='+localStorage.getItem('id_vis'))
-    .timeout(3*1000)
+    .timeout(10*1000)
     .map(res=>res.json())
     .subscribe(data=>{
       loading.dismiss();
@@ -196,8 +259,22 @@ export class DetailPage {
       loading.dismiss();
       let alert = this.alertCtlr.create({
         title : 'Error',
-        message : 'Internet connection lost, please try again',
-        buttons : ['Ok'],
+        message : 'Cannt add vessel to favorit because connection to server lost',
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+            }
+          },
+          {
+            text: 'Try Again',
+            handler: () => {
+              this.addFavorit();
+            }
+          }
+        ]
       });
       alert.present();
 
@@ -211,7 +288,7 @@ export class DetailPage {
     });  
     loading.present();
     this.http.get('http://vis.telkomsat.co.id/api.vessel.tracking/user/lepas_favorit.php?id_node='+this.id_node+'&id_user='+localStorage.getItem('id_vis'))
-    .timeout(3*1000)
+    .timeout(10*1000)
     .map(res=>res.json())
     .subscribe(data=>{
       loading.dismiss();
@@ -220,14 +297,135 @@ export class DetailPage {
       }
     },err=>{
       loading.dismiss();
+      
       let alert = this.alertCtlr.create({
         title : 'Error',
-        message : 'Internet connection lost, please try again',
-        buttons : ['Ok'],
+        message : 'Cannt remove vessel from favorit because connection to server lost',
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+            }
+          },
+          {
+            text: 'Try Again',
+            handler: () => {
+              this.removeFavorit();
+            }
+          }
+        ]
       });
       alert.present();
-
     });
+  }
+
+  goSensor(){
+    this.navCtrl.push(SensorPage,{id_node:this.id_node,nama_node:this.nama_kapal},{animate:true,direction:'forward'});
+  }
+
+  doRefresh(event){
+    this.http.get('http://vis.telkomsat.co.id/api.vessel.tracking/vessel/detail_v3.php?id_node='+this.id_node)
+    .timeout(10*1000)
+    .map(res=>res.json())
+    .subscribe(data=>{
+      event.complete();
+      this.sensor=data.sensor;
+      this.foto=encodeURI('http://vis.telkomsat.co.id/images_backup/'+data.foto);
+    },err=>{
+      event.complete();
+      let alert = this.alertCtlr.create({
+        title : 'Error',
+        message : 'Cannt retrieve vessel data from server',
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+
+            }
+          },
+          {
+            text: 'Try Again',
+            handler: () => {
+              this.getDetail();
+            }
+          }
+        ]
+      });
+      alert.present();
+    });
+
+    this.http.get('http://vis.telkomsat.co.id/api.vessel.tracking/vessel/history_voyage.php?id_node='+this.id_node)
+    .timeout(10*1000)
+    .map(res=>res.json())
+    .subscribe(data=>{
+      event.complete();
+      this.distance = data.jarak;
+      this.journey = data.waktu;
+      this.speed = data.kecepatan;
+      this.anchoring = data.lama_anchor;
+    },err=>{
+      event.complete();
+      let alert = this.alertCtlr.create({
+        title : 'Error',
+        message : 'Something wrong when calculating data on server',
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+            }
+          },
+          {
+            text: 'Try Again',
+            handler: () => {
+              this.getVoyage();
+            }
+          }
+        ]
+      });
+      alert.present();
+    });
+
+    this.http.get('http://vis.telkomsat.co.id/api.vessel.tracking/user/cek_favorit.php?id_node='+this.id_node+'&id_user='+localStorage.getItem('id_vis'))
+    .timeout(10*1000)
+    .map(res=>res.json())
+    .subscribe(data=>{
+      event.complete();
+      if(data.hasil_cek=='tidakada'){
+        this.favorit = true;
+      }else{
+        this.favorit = false;
+      }
+    },err=>{
+      event.complete();
+      let alert = this.alertCtlr.create({
+        title : 'Error',
+        message : 'Cannt retrieve favorit vessel data from server',
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+            }
+          },
+          {
+            text: 'Try Again',
+            handler: () => {
+              this.cekFavorit();
+            }
+          }
+        ]
+      });
+      alert.present();
+    });
+
+
   }
 
 }

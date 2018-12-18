@@ -1,13 +1,13 @@
 <ion-header>
   <ion-navbar color="primary">
     <ion-title>F A Q</ion-title>
-    <ion-buttons end>
-      <button ion-button icon-only><ion-icon name="contact"></ion-icon></button>
-    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content refreshingText="Please wait..." ></ion-refresher-content>
+  </ion-refresher>
   <div [innerHTML]="faq" class="faq-div"></div>
 </ion-content>

@@ -1,0 +1,17 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>{{nama_sensor}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content>
+  <ion-grid>
+  	<ion-row text-center>
+  	  <ion-col col-4 *ngFor="let sensor of datas" (click)="openMenu(sensor.nama_sub_sensor,sensor.nilai_sub_sensor, sensor.satuan_sub_sensor)">
+  	  	<img class="menu-image" src="{{sensor.gambar_sub_sensor}}">
+        <p>{{sensor.nama_sub_sensor}}</p>
+  	  </ion-col>
+  	</ion-row>
+  </ion-grid>
+</ion-content>

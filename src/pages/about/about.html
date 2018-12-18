@@ -1,12 +1,12 @@
 <ion-header>
   <ion-navbar color="primary">
     <ion-title>About VIS</ion-title>
-    <ion-buttons end>
-      <button ion-button icon-only><ion-icon name="contact"></ion-icon></button>
-    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  {{versi}}
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content refreshingText="Please wait..." ></ion-refresher-content>
+  </ion-refresher>
+  <div padding [innerHTML]="versi" class="berita"></div>
 </ion-content>

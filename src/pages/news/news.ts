@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, App, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, App, LoadingController, AlertController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/timeout';
@@ -15,7 +15,7 @@ export class NewsPage {
   news:any[]=[];
   lastId:any='';
   beritas:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private http:Http, private app:App, private loadingCtlr:LoadingController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private http:Http, private app:App, private loadingCtlr:LoadingController, private alertCtlr:AlertController) {
   	this.getBerita();
   }
 
@@ -26,7 +26,7 @@ export class NewsPage {
   getBerita(){
     let loading = this.loadingCtlr.create({
       spinner : 'dots',
-      content : 'Please wait'
+      content : 'Retrieving maritime news from server'
     });
     loading.present();
   	this.http.get('http://vis.telkomsat.co.id/api.vessel.tracking/berita/get_berita_v2.php?full=full&last_id=')
@@ -47,6 +47,26 @@ export class NewsPage {
       }
   	}, err=>{
       loading.dismiss();
+      let alert = this.alertCtlr.create({
+        title : 'Error',
+        message : 'Cannt retrive maritime news data from server',
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+            }
+          },
+          {
+            text: 'Try Again',
+            handler: () => {
+              this.getBerita();
+            }
+          }
+        ]
+      })
+      alert.present();
   	})
   }
 
@@ -78,6 +98,49 @@ export class NewsPage {
       });
       infiniteScroll.complete();
     }, 500);
+  }
+
+  doRefresh(event){
+    this.news=[];
+    this.http.get('http://vis.telkomsat.co.id/api.vessel.tracking/berita/get_berita_v2.php?full=full&last_id=')
+    .timeout(10*1000)
+    .map(res=>res.json())
+    .subscribe(data=>{
+      event.complete();
+      this.beritas = data.records;
+      let PanjangData = this.beritas.length;
+      this.lastId = this.beritas[PanjangData-1].id_berita;
+      for(let i = 0; i<this.beritas.length; i++){
+        this.news.push({
+          "id_berita": this.beritas[i].id_berita,
+          "judul_berita":this.beritas[i].judul_berita,
+          "preview_berita":this.beritas[i].preview_berita,
+          "gambar_berita":encodeURI(this.beritas[i].gambar_berita),
+        })
+      }
+    }, err=>{
+      event.complete();
+      let alert = this.alertCtlr.create({
+        title : 'Error',
+        message : 'Cannt retrive maritime news data from server',
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+            }
+          },
+          {
+            text: 'Try Again',
+            handler: () => {
+              this.getBerita();
+            }
+          }
+        ]
+      })
+      alert.present();
+    })
   }
 
   goDetail(id_berita){

@@ -1,17 +1,14 @@
 <ion-header #head>
   <ion-navbar color="primary">
-    <ion-title></ion-title>
-    <ion-buttons end icon-only>
-      <button ion-button>
-      	<ion-icon name="share"></ion-icon>
-      </button>
-      <button ion-button icon-only><ion-icon name="contact"></ion-icon></button>
-    </ion-buttons>
+    <ion-title>{{judul_berita}}</ion-title>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content hidden-bar [header]="head" fullscreen>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content refreshingText="Please wait..." ></ion-refresher-content>
+  </ion-refresher>
   <div padding class="judul-berita">
   	<h3>{{judul_berita}}</h3>
   	<p>{{sumber_berita}}</p>

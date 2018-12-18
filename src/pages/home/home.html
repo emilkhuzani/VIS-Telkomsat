@@ -1,13 +1,12 @@
 <ion-header>
   <ion-navbar color="primary"> 
     <ion-title>VIS Telkomsat</ion-title>
-    <ion-buttons end>
-      <button ion-button icon-only><ion-icon name="contact"></ion-icon></button>
-    </ion-buttons>
   </ion-navbar>
 </ion-header>
-
 <ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content refreshingText="Please wait..." ></ion-refresher-content>
+  </ion-refresher>
   <ion-slides *ngIf="datas && datas.length" pager autoplay="5000" loop="true" speed="1000">
     <ion-slide *ngFor="let item of datas">
       <img src="http://vis.patrakom.co.id/produk/{{item.gambar_produk}}" class="img-product">

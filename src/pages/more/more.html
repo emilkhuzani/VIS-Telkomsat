@@ -1,15 +1,24 @@
 <ion-header>
   <ion-navbar color="primary">
     <ion-title>More</ion-title>
-    <ion-buttons end>
-      <button ion-button icon-only><ion-icon name="contact"></ion-icon></button>
-    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content refreshingText="Please wait..." ></ion-refresher-content>
+  </ion-refresher>
   <ion-list no-lines>
+    <ion-item-divider color="light"></ion-item-divider>
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="../../assets/imgs/captain.png">
+      </ion-avatar>
+      <h2>{{nama_user}}</h2>
+      <p>{{email}}</p>
+      <p>{{nama_pelanggan}}</p>
+    </ion-item>
     <ion-item-divider color="light"></ion-item-divider>
     <button ion-item (click)="goAbout()">
       About VIS
@@ -24,4 +33,7 @@
     </button>
     <ion-item-divider color="light"></ion-item-divider>
   </ion-list>
+  <div padding>
+    <button ion-button color="danger" full round (click)="signOut()">Sign Out</button>
+  </div>
 </ion-content>
