@@ -2,6 +2,18 @@ page-home {
   ion-slides{
 	height: auto;
   }
+  .no-image{
+    width: 100%;
+    height: 150px;
+    background: url('../../assets/imgs/no-images/no-image-available.jpg') no-repeat center center;
+    background-size: cover;
+  }
+  .slider{
+    width:100%;
+    height: 150px;
+    background-position: center center;
+    background-size: cover;
+  }
   .img-product{
 	width:200%;
   }

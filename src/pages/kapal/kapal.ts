@@ -15,10 +15,18 @@ export class KapalPage {
   vessels:any;
   datas:any[]=[];
   lastId:any='';
+  ShowSearchText:boolean=true;
   constructor(public navCtrl: NavController, public navParams: NavParams, private http:Http, private loadingCtlr:LoadingController, private app : App, private alertCtlr:AlertController) {
   	this.getVessel();
   }
-
+  showSearch(){
+    if(this.ShowSearchText){
+      this.ShowSearchText=false;
+    }else{
+      this.ShowSearchText=true;
+    }
+    
+  }
   getVessel(){
   	let loading = this.loadingCtlr.create({
   	  spinner : 'dots',

@@ -7,9 +7,11 @@
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content refreshingText="Please wait..." ></ion-refresher-content>
   </ion-refresher>
-  <ion-slides *ngIf="datas && datas.length" pager autoplay="5000" loop="true" speed="1000">
-    <ion-slide *ngFor="let item of datas">
-      <img src="http://vis.patrakom.co.id/produk/{{item.gambar_produk}}" class="img-product">
+  <ion-slides *ngIf="produks && produks.length" pager autoplay="5000" loop="true" speed="1000">
+    <ion-slide *ngFor="let item of produks">
+      <div class="no-image">
+        <div class="slider" [style.backgroundImage]="'url('+item.gambar_produk+')'"></div>
+      </div>
     </ion-slide>
   </ion-slides>
   <ion-item-divider color="light" style="margin-top: -5px;"><b>Favorit Vessel</b></ion-item-divider>

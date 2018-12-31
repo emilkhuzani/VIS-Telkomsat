@@ -30,6 +30,7 @@ import { ModalResetPage } from '../pages/modal-reset/modal-reset';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { ImgFallbackModule } from 'ngx-img-fallback';
+import { HiddenBarDirective } from '../directives/hidden-bar/hidden-bar';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { ImgFallbackModule } from 'ngx-img-fallback';
     TrackingPage,
     SensorPage,
     SubSensorPage,
-    ModalResetPage
+    ModalResetPage,
+    HiddenBarDirective
   ],
   imports: [
     BrowserModule,

@@ -14,6 +14,7 @@ export class HomePage {
   datas:any;
   vessels:any[]=[];
   news:any[]=[];
+  produks:any[]=[];
   constructor(public navCtrl: NavController, private http:Http, private loadingCtlr:LoadingController, private app:App, private alertCtlr:AlertController) {
     this.getProduct();
     this.getFavorit();
@@ -32,6 +33,11 @@ export class HomePage {
   	.subscribe(data=>{
   	  loading.dismiss();
   	  this.datas=data.records;
+      for(let i=0;i<this.datas.length;i++){
+        this.produks.push({
+          "gambar_produk": encodeURI("http://vis.telkomsat.co.id/produk/"+this.datas[i].gambar_produk)
+        })
+      }
   	}, err=>{
   	  loading.dismiss();
       let alert = this.alertCtlr.create({
