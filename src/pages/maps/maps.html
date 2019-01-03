@@ -1,9 +1,10 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>Maps</ion-title>
+    <ion-title *ngIf="!ShowSearchText">Maps</ion-title>
+    <ion-searchbar *ngIf="ShowSearchText" showCancelButton="true" (search)="onSearch($event)" (ionCancel)="ShowSearchText=false"></ion-searchbar>
     <ion-buttons end>
-      <button ion-button icon-only><ion-icon name="search"></ion-icon></button>
-      <button ion-button icon-only (click)="refresh()"><ion-icon name="refresh"></ion-icon></button>
+      <button ion-button icon-only *ngIf="!ShowSearchText" (click)="ShowSearchText=true"><ion-icon name="search"></ion-icon></button>
+      <button ion-button icon-only *ngIf="!ShowSearchText" (click)="refresh()"><ion-icon name="refresh"></ion-icon></button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>

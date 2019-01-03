@@ -6,6 +6,7 @@ import 'rxjs/add/operator/timeout';
 
 import { DetailPage } from '../detail/detail';
 import { FollowVesselPage } from '../follow-vessel/follow-vessel';
+import { SearchResultPage } from '../search-result/search-result';
 
 @Component({
   selector: 'page-kapal',
@@ -15,17 +16,12 @@ export class KapalPage {
   vessels:any;
   datas:any[]=[];
   lastId:any='';
-  ShowSearchText:boolean=true;
+  ShowSearchText:boolean=false;
   constructor(public navCtrl: NavController, public navParams: NavParams, private http:Http, private loadingCtlr:LoadingController, private app : App, private alertCtlr:AlertController) {
   	this.getVessel();
   }
-  showSearch(){
-    if(this.ShowSearchText){
-      this.ShowSearchText=false;
-    }else{
-      this.ShowSearchText=true;
-    }
-    
+  onSearch(event){
+    this.app.getRootNav().push(SearchResultPage,{search:event.target.value},{animate:true,direction:'forward'});
   }
   getVessel(){
   	let loading = this.loadingCtlr.create({
@@ -41,7 +37,6 @@ export class KapalPage {
   	  this.vessels=data.records;
       let vesselsData = this.vessels.length;
       this.lastId = this.vessels[vesselsData-1].id_node;
-      console.log(this.lastId);
       for(let i = 0; i<this.vessels.length; i++){
           this.datas.push({
             "id_node":this.vessels[i].id_node,

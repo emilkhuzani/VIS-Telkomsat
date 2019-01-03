@@ -5,6 +5,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/timeout';
 import { MdDetailPage } from '../md-detail/md-detail';
 import { DetailPage } from '../detail/detail';
+import { SearchResultMapPage } from '../search-result-map/search-result-map';
 declare var google, MarkerClusterer;
 
 @IonicPage()
@@ -23,6 +24,7 @@ export class MapsPage {
   MyMarker:any;
   image :any;
   CustomHeading:any;
+  ShowSearchText:boolean=false;
   constructor(public navCtrl: NavController, public navParams: NavParams, private http:Http, public alertCtlr : AlertController, private modalCtlr:ModalController, private actionSheet:ActionSheetController, private app:App, private loadingCtlr:LoadingController ) {
     this.id_user=localStorage.getItem('id_vis');
   	
@@ -32,6 +34,10 @@ export class MapsPage {
     this.showMap();
     this.getPosition();
     this.refreshMarker();
+  }
+
+  onSearch(event){
+    this.app.getRootNav().push(SearchResultMapPage,{search:event.target.value},{animate:true,direction:'forward'});
   }
 
   showMap(){
@@ -371,17 +377,6 @@ export class MapsPage {
 	        map: this.map,
           icon:this.image,
         });
-        
-        /*marker.setIcon({
-          fillOpacity: 1,
-          strokeWeight: 2,
-          strokeColor : this.locations[i].stroke_color,
-          fillColor: this.locations[i].fill_color,
-          path: "M70 125 L 70 245 180 245 180 125 Q 180 65 125 10 70 70 70 125 M 70 185 L 180 185",
-          scale: 0.060,
-          rotation: heading
-          icon:image
-        });*/
         let nama_node = this.locations[i].node_name;
         let id_node = this.locations[i].host_id;
         let last_seen = this.locations[i].status_poll;

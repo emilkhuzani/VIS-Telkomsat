@@ -26,6 +26,8 @@ import { TrackingPage } from '../pages/tracking/tracking';
 import { SensorPage } from '../pages/sensor/sensor';
 import { SubSensorPage } from '../pages/sub-sensor/sub-sensor';
 import { ModalResetPage } from '../pages/modal-reset/modal-reset';
+import { SearchResultPage } from '../pages/search-result/search-result';
+import { SearchResultMapPage } from '../pages/search-result-map/search-result-map';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -57,6 +59,8 @@ import { HiddenBarDirective } from '../directives/hidden-bar/hidden-bar';
     SensorPage,
     SubSensorPage,
     ModalResetPage,
+    SearchResultPage,
+    SearchResultMapPage,
     HiddenBarDirective
   ],
   imports: [
@@ -89,7 +93,9 @@ import { HiddenBarDirective } from '../directives/hidden-bar/hidden-bar';
     TrackingPage,
     SensorPage,
     SubSensorPage,
-    ModalResetPage
+    ModalResetPage,
+    SearchResultPage,
+    SearchResultMapPage
   ],
   providers: [
     StatusBar,
