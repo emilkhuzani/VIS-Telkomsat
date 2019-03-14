@@ -26,12 +26,13 @@ export class WelcomePage {
     },
     {
       title: "Precision Position",
-      description: "We use the new gps tracking technology with satelite support, to make the ship position more precision",
+      description: "We use the new gps tracking technology with satelite transmission, to make the ship position more precision",
       image: "../../assets/imgs/welcome/satellite.png",
     }
     ];
+    //this.insertId();
     if(localStorage.getItem('id_vis')!=undefined){
-      this.navCtrl.push(TabsPage, {}, {animate:true,direction:'forward'});
+      this.navCtrl.setRoot(TabsPage, {}, {animate:true,direction:'forward'});
     }
   }
   goLogin(){
@@ -39,7 +40,7 @@ export class WelcomePage {
   }
 
   insertId(){
-    //localStorage.setItem('id_vis','1');
+    localStorage.setItem('id_vis','29');
   }
 
   ionViewDidLoad() {

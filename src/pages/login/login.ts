@@ -49,7 +49,7 @@ export class LoginPage {
       loading.dismiss();
       if(!data.pesanerror){
         localStorage.setItem('id_vis',data.id_user);
-        this.navCtrl.push(TabsPage,{},{animate:true,direction:'forward'});
+        this.navCtrl.setRoot(TabsPage,{},{animate:true,direction:'forward'});
       }else{
         let alert = this.alertCtlr.create({
           title : 'Error',

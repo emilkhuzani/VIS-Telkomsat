@@ -19,4 +19,29 @@ page-detail {
     font-weight: bold;
     text-transform: uppercase;
   }
+  .first{
+    border-right: solid 1px #eee;
+    border-bottom: solid 1px #eee;
+    padding-top: 10px;
+  }
+  .second{
+    border-bottom: solid 1px #eee;
+    padding-top: 10px;
+  }
+  .third{
+    border-right: solid 1px #eee;
+    padding-top: 10px;
+  }
+
+  .third{
+    padding-top: 10px;
+  }
+  
+  .subjudul{
+      display: block;
+      padding: 5px;
+      font-weight: bold;
+      font-size: .7em;
+      opacity: .7;
+  }
 }

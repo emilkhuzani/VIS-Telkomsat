@@ -6,7 +6,7 @@
 <ion-content padding full-screen text-center>
   <div padding>
   	<div padding>
-	  <h3 class="logo">VIS</h3>
+	  <img src="../../assets/imgs/logo.png" class="logo-img">
 	  <p class="sub-logo">Vessel Information System</p>
 	  <div class="spacer"></div>
 	  <p class="paragraph-mini">Enter your email and password to start session</p>
@@ -15,7 +15,7 @@
 	    <input type="email" placeholder="Email" formControlName="email" [(ngModel)]="txtemail">
 	    <input type="password" placeholder="Password" formControlName="password" [(ngModel)]="txtpassword">
 	    <div class="spacer"></div>
-	    <button ion-button round block color="secondary" [disabled]="!formgroup.valid"> Login </button>
+	    <button ion-button round block color="light" [disabled]="!formgroup.valid"> Login </button>
 	  </form>
 	  <div class="spacer"></div>
 	  <button ion-button round block clear color="light" (click)="forgotPassword()"> Forgot Your Password ?</button>

@@ -143,63 +143,12 @@ export class DetailPage {
   }
 
   openMap(){
-    let action = this.actionSheet.create({
-      title : 'MAP TRACKING',
-      buttons: [
-            {
-              text: 'Open Map',
-              icon: 'map',
-              handler: () => {
-                this.navCtrl.push(WeekTrackPage,{id_node:this.id_node,nama_node:this.nama_kapal},{animate:true, direction:'forward'});
-              }
-            },
-            {
-              text: '1 Week',
-              icon: 'clock',
-              handler: () => {
-              }
-            },
-            {
-              text: 'Cancel',
-              role: 'cancel',
-              icon: 'close',
-              handler: () => {
-                console.log('Cancel clicked');
-              }
-            }
-          ]
-    });
-    action.present();
+    this.navCtrl.push(WeekTrackPage,{id_node:this.id_node,nama_node:this.nama_kapal},{animate:true, direction:'forward'});
   }
 
   openMapFollow(){
-    let action = this.actionSheet.create({
-      title : 'FOLLOW VESSEL',
-      buttons: [
-            {
-              text: 'Open Map',
-              icon: 'map',
-              handler: () => {
-                this.navCtrl.push(FollowVesselPage,{id_node:this.id_node,nama_node:this.nama_kapal},{animate:true, direction:'forward'});
-              }
-            },
-            {
-              text: 'Realtime',
-              icon: 'clock',
-              handler: () => {
-              }
-            },
-            {
-              text: 'Cancel',
-              role: 'cancel',
-              icon: 'close',
-              handler: () => {
-                console.log('Cancel clicked');
-              }
-            }
-          ]
-    });
-    action.present();
+    this.navCtrl.push(FollowVesselPage,{id_node:this.id_node,nama_node:this.nama_kapal},{animate:true, direction:'forward'});
+    
   }
 
   openModal(){

@@ -28,6 +28,7 @@ import { SubSensorPage } from '../pages/sub-sensor/sub-sensor';
 import { ModalResetPage } from '../pages/modal-reset/modal-reset';
 import { SearchResultPage } from '../pages/search-result/search-result';
 import { SearchResultMapPage } from '../pages/search-result-map/search-result-map';
+import { PopoverPage } from '../pages/popover/popover';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -61,6 +62,7 @@ import { HiddenBarDirective } from '../directives/hidden-bar/hidden-bar';
     ModalResetPage,
     SearchResultPage,
     SearchResultMapPage,
+    PopoverPage,
     HiddenBarDirective
   ],
   imports: [
@@ -95,7 +97,8 @@ import { HiddenBarDirective } from '../directives/hidden-bar/hidden-bar';
     SubSensorPage,
     ModalResetPage,
     SearchResultPage,
-    SearchResultMapPage
+    SearchResultMapPage,
+    PopoverPage
   ],
   providers: [
     StatusBar,

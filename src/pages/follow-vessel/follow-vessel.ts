@@ -1,9 +1,10 @@
 import { Component,ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, ActionSheetController, AlertController, App } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ActionSheetController, AlertController, App, PopoverController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/timeout';
 import { DetailPage } from '../detail/detail';
+import { PopoverPage } from '../popover/popover';
 declare var google;
 
 @IonicPage()
@@ -20,7 +21,7 @@ export class FollowVesselPage {
   nama_node:string;
   CustomHeading:any;
   image:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private http:Http, private actionSheet: ActionSheetController, private alertCtlr:AlertController, private app:App) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private http:Http, private actionSheet: ActionSheetController, private alertCtlr:AlertController, private app:App, private popoverCtlr:PopoverController) {
   	this.id_node=this.navParams.get('id_node');
   	this.nama_node=this.navParams.get('nama_node');
   }
@@ -40,302 +41,7 @@ export class FollowVesselPage {
 		  streetViewControl:false,
 		  fullScreenControl:false,
 		  zoomControl:false,
-      styles:[
-      {
-        "featureType": "all",
-        "elementType": "labels.text.fill",
-        "stylers": [
-            {
-                "saturation": 36
-            },
-            {
-                "color": "#000000"
-            },
-            {
-                "lightness": 40
-            }
-        ]
-      },
-      {
-        "featureType": "all",
-        "elementType": "labels.text.stroke",
-        "stylers": [
-            {
-                "visibility": "on"
-            },
-            {
-                "color": "#000000"
-            },
-            {
-                "lightness": 16
-            }
-        ]
-      },
-      {
-        "featureType": "all",
-        "elementType": "labels.icon",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-      },
-      {
-        "featureType": "administrative",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "color": "#000000"
-            },
-            {
-                "lightness": 20
-            }
-        ]
-      },
-      {
-        "featureType": "administrative",
-        "elementType": "geometry.stroke",
-        "stylers": [
-            {
-                "color": "#000000"
-            },
-            {
-                "lightness": 17
-            },
-            {
-                "weight": 1.2
-            }
-        ]
-      },
-      {
-        "featureType": "administrative.locality",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-      },
-      {
-        "featureType": "landscape",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "color": "#000000"
-            },
-            {
-                "lightness": 20
-            }
-        ]
-      },
-      {
-        "featureType": "poi",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "color": "#000000"
-            },
-            {
-                "lightness": 21
-            }
-        ]
-      },
-      {
-        "featureType": "poi.attraction",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "visibility": "on"
-            },
-            {
-                "saturation": "100"
-            }
-        ]
-      },
-      {
-        "featureType": "poi.business",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "visibility": "on"
-            },
-            {
-                "saturation": "100"
-            }
-        ]
-      },
-      {
-        "featureType": "poi.park",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "visibility": "on"
-            }
-        ]
-      },
-      {
-        "featureType": "poi.park",
-        "elementType": "geometry.stroke",
-        "stylers": [
-            {
-                "visibility": "on"
-            }
-        ]
-      },
-      {
-        "featureType": "poi.place_of_worship",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "visibility": "on"
-            },
-            {
-                "saturation": "100"
-            }
-        ]
-      },
-      {
-        "featureType": "poi.school",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "visibility": "on"
-            }
-        ]
-      },
-      {
-        "featureType": "poi.sports_complex",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "visibility": "on"
-            },
-            {
-                "saturation": "100"
-            }
-        ]
-      },
-      {
-        "featureType": "poi.sports_complex",
-        "elementType": "labels.text.fill",
-        "stylers": [
-            {
-                "visibility": "on"
-            }
-        ]
-      },
-      {
-        "featureType": "road.highway",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "visibility": "on"
-            }
-        ]
-      },
-      {
-        "featureType": "road.highway",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "color": "#000000"
-            },
-            {
-                "lightness": 17
-            }
-        ]
-      },
-      {
-        "featureType": "road.highway",
-        "elementType": "geometry.stroke",
-        "stylers": [
-            {
-                "color": "#000000"
-            },
-            {
-                "lightness": 29
-            },
-            {
-                "weight": 0.2
-            }
-        ]
-      },
-      {
-        "featureType": "road.arterial",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "color": "#000000"
-            },
-            {
-                "lightness": 18
-            }
-        ]
-      },
-      {
-        "featureType": "road.local",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "color": "#000000"
-            },
-            {
-                "lightness": 16
-            }
-        ]
-      },
-      {
-        "featureType": "transit",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "color": "#000000"
-            },
-            {
-                "lightness": 19
-            }
-        ]
-      },
-      {
-        "featureType": "transit.station.airport",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "visibility": "on"
-            }
-        ]
-      },
-      {
-        "featureType": "transit.station.bus",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "visibility": "on"
-            }
-        ]
-      },
-      {
-        "featureType": "transit.station.rail",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "visibility": "on"
-            }
-        ]
-      },
-      {
-        "featureType": "water",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "color": "#15556f"
-            },
-            {
-                "lightness": 17
-            }
-        ]
-      }
-    ]
+      
     }
     this.map= new google.maps.Map(this.mapElement.nativeElement, mapOptions);
   }
@@ -366,8 +72,17 @@ export class FollowVesselPage {
   	  	marker = new google.maps.Marker({
 	        position: new google.maps.LatLng(this.locations[i].lat,this.locations[i].lng),
 	        map: this.map,
-          icon:this.image,
+          //icon:this.image,
         });
+        marker.setIcon({
+          fillOpacity: 1,
+          strokeWeight: 1,
+          strokeColor : this.locations[i].stroke_color,
+          fillColor: this.locations[i].fill_color,
+          path: "M 0.00 0.02 C 18.62 18.54 37.08 37.22 55.76 55.67 C 73.87 37.70 91.68 19.41 110.00 1.70 L 110.00 145.39 C 91.67 164.07 72.95 182.37 54.58 201.00 L 54.53 201.00 C 36.33 182.89 18.26 164.64 0.00 146.58 L 0.00 0.02 Z",
+          scale: 0.060,
+          rotation: heading
+        })
         
         /*marker.setIcon({
           fillOpacity: 1,
@@ -380,8 +95,10 @@ export class FollowVesselPage {
         });*/
         let nama_node = this.locations[i].node_name;
         let id_node = this.locations[i].host_id;
+        let foto = this.locations[i].foto;
+        let last_seen = this.locations[i].status_poll;
         google.maps.event.addListener(marker, 'click', () =>{
-          let action = this.actionSheet.create({
+          /*let action = this.actionSheet.create({
             title : nama_node,
             buttons: [
             {
@@ -402,7 +119,9 @@ export class FollowVesselPage {
             }
           ]
           });
-          action.present();
+          action.present();*/
+          let popover = this.popoverCtlr.create(PopoverPage,{nama_node:nama_node,id_node:id_node,foto:foto, last_seen:last_seen});
+          popover.present();
         });
         this.markers.push(marker);
   	  }

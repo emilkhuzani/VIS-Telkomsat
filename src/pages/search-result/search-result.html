@@ -13,7 +13,7 @@
     <div style="width:100%;height: 250px;background-position: center center;background-size:cover;" [style.backgroundImage]="'url('+vessel.foto+')'"></div>
     </div>
     <div class="tombol">
-      <button ion-button round small  icon-start icon-only color="danger" (click)="followVessel(vessel.nama_node,vessel.id_node)"><ion-icon name="pin"></ion-icon></button>
+      <button ion-button round small  icon-start color="primary" (click)="followVessel(vessel.nama_node,vessel.id_node)"><ion-icon name="pin"></ion-icon> Follow</button>
     </div>
     <div class="card-container" (click)="goDetail(vessel.id_node,vessel.nama_node)">
       <div class="card-title">{{vessel.nama_node}}</div>

@@ -14,3 +14,100 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+ion-icon {
+  &[class*="custom-"] {
+    mask-size: contain;
+    mask-position: 50% 50%;
+    mask-repeat: no-repeat;
+    background: currentColor;
+    width: 1em;
+    height: 1em;
+  }
+  &[class*="custom-map"] {
+      mask-image: url(../../assets/font/street-map.svg);
+      color: black !important;
+      font-size: 25px !important;
+  }
+  &[class*="custom-ship"] {
+      mask-image: url(../../assets/font/ship.svg);
+      color: black !important;
+      font-size: 25px !important;
+  }
+  &[class*="custom-newspaper"] {
+      mask-image: url(../../assets/font/newspaper.svg);
+      color: black !important;
+      font-size: 25px !important;
+  }
+  &[class*="custom-manual"] {
+      mask-image: url(../../assets/font/manual.svg);
+      color: black !important;
+      font-size: 25px !important;
+  }
+  &[class*="custom-home"] {
+      mask-image: url(../../assets/font/house.svg);
+      color: black !important;
+      font-size: 25px !important;
+  }
+  &[class*="custom-arrow"] {
+      mask-image: url(../../assets/font/arrow.svg);
+      color: white !important;
+      font-size: 15px !important;
+  }
+  &[class*="custom-warning"] {
+      mask-image: url(../../assets/font/warning.svg);
+      color: black !important;
+      font-size: 25px !important;
+  }
+  &[class*="custom-sinking"] {
+      mask-image: url(../../assets/font/sinking.svg);
+      color: black !important;
+      font-size: 25px !important;
+  }
+  &[class*="custom-distance"] {
+      mask-image: url(../../assets/font/distance.svg);
+      color: black !important;
+      font-size: 25px !important;
+  }
+  &[class*="custom-map-transports"] {
+      mask-image: url(../../assets/font/map-transports.svg);
+      color: black !important;
+      font-size: 25px !important;
+  }
+  &[class*="custom-speed"] {
+      mask-image: url(../../assets/font/speed.svg);
+      color: black !important;
+      font-size: 25px !important;
+  }
+  &[class*="custom-anchor"] {
+      mask-image: url(../../assets/font/anchor.svg);
+      color: black !important;
+      font-size: 25px !important;
+  }
+  &[class*="custom-tracking"] {
+      mask-image: url(../../assets/font/tracking.svg);
+      color: black !important;
+      font-size: 25px !important;
+  }
+  &[class*="custom-follow"] {
+      mask-image: url(../../assets/font/follow.svg);
+      color: black !important;
+      font-size: 25px !important;
+  }
+  &[class*="custom-hourglass"] {
+      mask-image: url(../../assets/font/hourglass.svg);
+      color: black !important;
+      font-size: 25px !important;
+  }
+  &[class*="custom-star"] {
+      mask-image: url(../../assets/font/star.svg);
+      color: black !important;
+      font-size: 25px !important;
+  }
+  &[class*="custom-unstar"] {
+      mask-image: url(../../assets/font/unstar.svg);
+      color: black !important;
+      font-size: 25px !important;
+  }
+}
+
+

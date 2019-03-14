@@ -14,7 +14,7 @@ export class MyApp {
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {
       statusBar.styleLightContent();
-      statusBar.backgroundColorByHexString('#488aff');
+      statusBar.backgroundColorByHexString('#ba2727');
       splashScreen.hide();
     });
   }

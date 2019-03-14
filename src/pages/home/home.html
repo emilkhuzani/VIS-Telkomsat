@@ -1,20 +1,88 @@
 <ion-header>
-  <ion-navbar color="primary"> 
-    <ion-title>VIS Telkomsat</ion-title>
+  <ion-navbar color="primary" text-center> 
+    <img src="../../assets/icon/logo.png" class="logo">
   </ion-navbar>
 </ion-header>
 <ion-content>
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content refreshingText="Please wait..." ></ion-refresher-content>
   </ion-refresher>
-  <ion-slides *ngIf="produks && produks.length" pager autoplay="5000" loop="true" speed="1000">
+  <ion-slides *ngIf="produks && produks.length" pager autoplay="5000" loop="true" speed="1000" spaceBetween="15">
     <ion-slide *ngFor="let item of produks">
-      <div class="no-image">
+      <!--<div class="no-image">
         <div class="slider" [style.backgroundImage]="'url('+item.gambar_produk+')'"></div>
+      </div>-->
+      <div class="card-3">
+        <div class="wall-3" [style.backgroundImage]="'url('+item.gambar_produk+')'"></div>
       </div>
     </ion-slide>
+    <br>
   </ion-slides>
-  <ion-item-divider color="light" style="margin-top: -5px;"><b>Favorit Vessel</b></ion-item-divider>
+  <ion-item-divider color="light"><b>Vessel Summary</b></ion-item-divider>
+  <div padding>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-6>
+          <div>
+            <ion-row>
+              <ion-col align-self-start col-7 style="color:#716aca;">
+                Vessels<br>
+                Total
+                <h4>{{jumlah_kapal}}</h4>
+              </ion-col>
+              <ion-col col-5>
+                <ion-icon name="custom-home" color="red"></ion-icon>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ion-col>
+        <ion-col col-6>
+          <div>
+            <ion-row>
+              <ion-col align-self-start col-7 style="color:#00c5dc;"> 
+                Vessels<br>
+                Normal
+                <h4>{{jumlah_kapal}}</h4>
+              </ion-col>
+              <ion-col col-5>
+                <ion-icon name="custom-ship"></ion-icon>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ion-col>
+        
+        <ion-col col-6>
+          <div>
+            <ion-row>
+              <ion-col align-self-start col-7 style="color:#f4516c;">
+                Vessels<br>
+                Error
+                <h4>0</h4>
+              </ion-col>
+              <ion-col col-5>
+                <ion-icon name="custom-sinking"></ion-icon>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ion-col>
+        <ion-col col-6>
+          <div>
+            <ion-row>
+              <ion-col align-self-start col-7 style="color:#ffb822;">
+                Vessels<br>
+                Warning
+                <h4>0</h4>
+              </ion-col>
+              <ion-col col-5>
+                <ion-icon name="custom-warning"></ion-icon>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <ion-item-divider color="light"><b>Favorit Vessel</b></ion-item-divider>
   <ion-item *ngIf="!vessels" no-lines>
     You not add any vassel on your favorit list
   </ion-item>
@@ -34,8 +102,8 @@
       <ion-avatar item-start>
         <img src="http://vis.telkomsat.co.id/images_news/{{new.gambar_berita}}" src-fallback="../../assets/imgs/no-images/no-image-available.jpg"/>
       </ion-avatar>
-      <h2>{{new.judul_berita}}</h2>
-      <p style="white-space: normal !important;">{{new.preview_berita}}</p>
+      <h2 class="judul-berita">{{new.judul_berita}}</h2>
+      <p class="cuplik-berita">{{new.preview_berita}}</p>
     </ion-item>
   </ion-list>
 </ion-content>

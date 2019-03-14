@@ -32,17 +32,35 @@ export class SearchResultPage {
   	.map(res=>res.json())
   	.subscribe(data=>{
   	  loading.dismiss();
-  	  this.vessels=data.records;
-      let vesselsData = this.vessels.length;
-      for(let i = 0; i<this.vessels.length; i++){
+  	  
+      if(data.records.length==0){
+        let alert = this.alertCtlr.create({
+          title : 'Not Found',
+          message : 'Vessels not found, please try again with difference keywords',
+          buttons: [
+            {
+              text: 'Ok',
+              role: 'cancel',
+              handler: () => {
+                console.log('Cancel clicked');
+              }
+            }
+          ]
+        });
+        alert.present();
+      }else{
+        this.vessels=data.records;
+        let vesselsData = this.vessels.length;
+        for(let i = 0; i<this.vessels.length; i++){
           this.datas.push({
             "id_node":this.vessels[i].id_node,
             "nama_node":this.vessels[i].nama_node,
             "nama_pelanggan":this.vessels[i].owner,
             "foto": encodeURI("http://vis.telkomsat.co.id/images_backup/"+this.vessels[i].foto),
           })
-        
+        }
       }
+
   	},err=>{
   	  loading.dismiss();
       let alert = this.alertCtlr.create({

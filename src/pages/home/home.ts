@@ -15,8 +15,10 @@ export class HomePage {
   vessels:any[]=[];
   news:any[]=[];
   produks:any[]=[];
+  jumlah_kapal:any;
   constructor(public navCtrl: NavController, private http:Http, private loadingCtlr:LoadingController, private app:App, private alertCtlr:AlertController) {
     this.getProduct();
+    this.getVesselTotal();
     this.getFavorit();
     this.getBerita();
   }
@@ -63,6 +65,43 @@ export class HomePage {
   	})
   }
 
+  getVesselTotal(){
+    let loading = this.loadingCtlr.create({
+      spinner : 'dots',
+      content : 'Retrieving total vessels registered from server...'
+    });
+    loading.present();
+    this.http.get('http://vis.telkomsat.co.id/api.vessel.tracking/user/jumlah_kapal.php?id_user='+localStorage.getItem('id_vis'))
+    .timeout(10*1000)
+    .map(res=>res.json())
+    .subscribe(data=>{
+      loading.dismiss();
+      this.jumlah_kapal=data.jumlah_kapal;
+    }, err=>{
+      loading.dismiss();
+      let alert = this.alertCtlr.create({
+        title : 'Error',
+        message : 'Cannt retrieve vessels registered data from server',
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+            }
+          },
+          {
+            text: 'Try Again',
+            handler: () => {
+              this.getVesselTotal();
+            }
+          }
+        ]
+      });
+      alert.present();
+    })
+  }
+
   getFavorit(){
     let loading = this.loadingCtlr.create({
       spinner : 'dots',
@@ -74,13 +113,18 @@ export class HomePage {
   	.map(res=>res.json())
   	.subscribe(data=>{
       loading.dismiss();
-  	  for(let i = 0; i<data.records.length; i++){
-        this.vessels.push({
-          "id_node":data.records[i].id_node,
-          "nama_node":data.records[i].nama_node,
-          "foto": encodeURI("http://vis.telkomsat.co.id/images_backup/"+data.records[i].foto),
-        })
+      if(data.records){
+        for(let i = 0; i<data.records.length; i++){
+          this.vessels.push({
+            "id_node":data.records[i].id_node,
+            "nama_node":data.records[i].nama_node,
+            "foto": encodeURI("http://vis.telkomsat.co.id/images_backup/"+data.records[i].foto),
+          })
+        }
+      }else{
+
       }
+  	  
   	}, err=>{
       loading.dismiss();
       let alert = this.alertCtlr.create({

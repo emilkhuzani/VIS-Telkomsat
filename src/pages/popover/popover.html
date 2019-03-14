@@ -1,0 +1,19 @@
+
+    <ion-list radio-group  class="popover-page">
+      <ion-row >
+        <ion-col>
+          <button  (click)="goDetail()" color="light" ion-item detail-none icon-end class="text-button text-larger text-bold">{{nama_node}}</button>
+        </ion-col>
+      </ion-row>
+      <ion-row class="row-dots">
+        <div style="width:100%;height: 250px;background-image: url('../../assets/imgs/no-images/no-image-available.jpg');background-size: cover;background-position: center center;">
+          <div style="width:100%;height: 250px;background-position: center center;background-size:cover;" [style.backgroundImage]="'url('+foto+')'"></div>
+        </div>
+      </ion-row>
+      <div style="float: left;margin-left:10px;">
+          <button  (click)="closePopo()" color="primary" ion-button icon-only clear><ion-icon name="close"></ion-icon></button>
+        </div>
+        <div style="float: right;margin-right:10px;">
+          <button  (click)="goDetail()" color="primary" ion-button icon-only clear><ion-icon name="arrow-forward"></ion-icon></button>
+        </div>
+    </ion-list>
