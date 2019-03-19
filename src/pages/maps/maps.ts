@@ -60,7 +60,7 @@ export class MapsPage {
   }
   getPosition(){
   	let marker;
-  	this.http.get('http://vis.telkomsat.co.id/api.vessel.tracking/vessel/marker_v3_second.php?id_user='+this.id_user)
+  	this.http.get('http://vis.telkomsat.co.id/api.vessel.tracking/vessel/realtime/realtime.php?id_user='+this.id_user)
   	.timeout(10*1000)
   	.map(res=>res.json())
   	.subscribe(data=>{
@@ -69,11 +69,11 @@ export class MapsPage {
       for(let i=0;i<this.locations.length;i++){
         let direction = new google.maps.LatLng(this.locations[i].lat, this.locations[i].lng);
         let station = new google.maps.LatLng(this.locations[i].latheading, this.locations[i].longheading);
-        let heading = google.maps.geometry.spherical.computeHeading(direction,station)+180;
+        let heading = google.maps.geometry.spherical.computeHeading(direction,station);
         this.customHeading(heading,10);
         this.image = {
-          url: '../../assets/imgs/marker_map/normal/'+this.CustomHeading+'.png',
-          scaledSize: new google.maps.Size(25, 25),
+          url: '../../assets/imgs/marker_map/normal/01.png',
+          scaledSize: new google.maps.Size(70, 70),
           origin: new google.maps.Point(0,0),
           anchor: new google.maps.Point(12.5,12.5)
         }

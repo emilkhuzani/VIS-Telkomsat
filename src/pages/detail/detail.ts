@@ -17,8 +17,8 @@ export class DetailPage {
   id_node:string;
   foto:string;
   favorit:boolean;
-  distance:string;
-  journey:string;
+  distance:any;
+  journey:any;
   speed:string;
   anchoring:string;
   sensor:string;
@@ -85,8 +85,13 @@ export class DetailPage {
     .subscribe(data=>{
       loading.dismiss();
       this.distance = data.jarak;
-      this.journey = data.waktu;
+      
       this.speed = data.kecepatan;
+      if(this.distance==0){
+        this.journey=0;
+      }else{
+        this.journey = data.waktu;
+      }
       this.anchoring = data.lama_anchor;
     },err=>{
       loading.dismiss();

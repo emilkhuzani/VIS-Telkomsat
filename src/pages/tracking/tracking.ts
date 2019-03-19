@@ -70,41 +70,57 @@ export class TrackingPage {
     .map(res=>res.json())
     .subscribe(data=>{
       loading.dismiss();
-      this.markers = data.locations;
-      let panjangData = this.markers.length;
-      this.lastLatitude = this.markers[panjangData-1].lat;
-      this.lastLongitude = this.markers[panjangData-1].long;
-      this.firstLatitude = this.markers[0].lat;
-      this.firstLongitude = this.markers[0].long;
-      marker = new google.maps.Marker({
-	    position: new google.maps.LatLng(this.lastLatitude,this.lastLongitude),
-	    map: this.map,
-	    label: 'E',
-	  });
-	  marker = new google.maps.Marker({
-	    position: new google.maps.LatLng(this.firstLatitude,this.firstLongitude),
-	    map: this.map,
-	    label: 'S',
-	  });
-	  let latLng = new google.maps.LatLng(this.firstLatitude, this.firstLongitude);
-    this.map.panTo(latLng);
-      poly = new google.maps.Polyline({
-        strokeColor: '#B25D71',
-        strokeOpacity: 0.8,
-        strokeWeight:3,
-        map:this.map,
-        icons: [{
-          icon: {fillOpacity: 1,path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,scale: 2,fillColor: "#B25D71"},
-          offset: '100%',
-          repeat: '100px'
-        }]
-      });
-      this.path = poly.getPath();
-      for(let i=0;i<this.markers.length;i++){
+      if(data.locations==null){
+        let alert = this.alertCtlr.create({
+          title : 'Not Found',
+          message : 'Tracking data not found, please try again with difference date range',
+          buttons: [
+            {
+              text: 'Ok',
+              role: 'cancel',
+              handler: () => {
+                console.log('Cancel clicked');
+              }
+            }
+          ]
+        });
+        alert.present();
+      }else{
+        this.markers = data.locations;
+        let panjangData = this.markers.length;
+        this.lastLatitude = this.markers[panjangData-1].lat;
+        this.lastLongitude = this.markers[panjangData-1].long;
+        this.firstLatitude = this.markers[0].lat;
+        this.firstLongitude = this.markers[0].long;
         marker = new google.maps.Marker({
-	      position: new google.maps.LatLng(this.markers[i].lat,this.markers[i].long),
-	      map: this.map,
-	      icon: image
+	        position: new google.maps.LatLng(this.lastLatitude,this.lastLongitude),
+	        map: this.map,
+	        label: 'E',
+	      });
+	      marker = new google.maps.Marker({
+	        position: new google.maps.LatLng(this.firstLatitude,this.firstLongitude),
+	        map: this.map,
+	        label: 'S',
+	      });
+	      let latLng = new google.maps.LatLng(this.firstLatitude, this.firstLongitude);
+        this.map.panTo(latLng);
+        poly = new google.maps.Polyline({
+          strokeColor: '#B25D71',
+          strokeOpacity: 0.8,
+          strokeWeight:3,
+          map:this.map,
+          icons: [{
+            icon: {fillOpacity: 1,path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,scale: 2,fillColor: "#B25D71"},
+            offset: '100%',
+            repeat: '100px'
+          }]
+        });
+        this.path = poly.getPath();
+        for(let i=0;i<this.markers.length;i++){
+          marker = new google.maps.Marker({
+	        position: new google.maps.LatLng(this.markers[i].lat,this.markers[i].long),
+	        map: this.map,
+	        icon: image
         });
         let latitude = this.markers[i].lat;
         let longitude = this.markers[i].long;
@@ -141,6 +157,7 @@ export class TrackingPage {
           }
         })(marker));
       }
+    }
 
     },err=>{
       loading.dismiss();

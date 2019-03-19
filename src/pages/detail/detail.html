@@ -12,57 +12,39 @@
   <div class="no-image">
   	<div class="foto-kapal" [style.backgroundImage]="'url('+foto+')'"></div>
   </div>
-  <ion-item-divider color="light"><b>Week Calculation</b></ion-item-divider>
+  <ion-item-divider color="light"><b>One Week Journey Resume</b></ion-item-divider>
   <ion-row text-center>
-        <ion-col class="first" col-4>
+        <ion-col class="first" col-6>
           <ion-icon name="custom-distance"></ion-icon>
-          <div class="subjudul">Distance</div>
+          <div class="subjudul">Distance Traveled</div>
           <p style="line-height: 10px;margin-top:5px;font-size: 0.8em;">{{distance}} Mill</p>
         </ion-col>
-        <ion-col class="first" col-4>
+        <ion-col class="first" col-6>
           <ion-icon name="custom-map-transports"></ion-icon>
           <div class="subjudul">Voyage</div>
           <p style="line-height: 10px;margin-top:5px;font-size: 0.8em;">{{journey}} Hours</p>
         </ion-col>
-        <ion-col class="second" col-4>
+        <ion-col class="first" col-6>
           <ion-icon name="custom-speed"></ion-icon>
           <div class="subjudul">Speed</div>
           <p style="line-height: 10px;margin-top:5px;font-size: 0.8em;">{{speed}} Mph</p>
         </ion-col>
-        <ion-col class="third" col-4>
+        <ion-col class="second" col-6>
           <ion-icon name="custom-anchor"></ion-icon>
-          <div class="subjudul">Anchoring</div>
+          <div class="subjudul">Anchoring Time</div>
           <p style="line-height: 10px;margin-top:5px;font-size: 0.8em;">{{anchoring}} Hours</p>
         </ion-col>
-        <ion-col class="third" col-4>
-          
-        </ion-col>
-        <ion-col class="third" col-4>
-          
-        </ion-col>
   </ion-row>
-  <ion-item-divider color="light"><b>Vessel Control</b></ion-item-divider>
-  <ion-row text-center>
-        <ion-col class="first" col-6 (click)="openMap()">
-          <ion-icon name="custom-tracking"></ion-icon>
-          <div class="subjudul">TRACKING</div>
-        </ion-col>
-        <ion-col class="second" col-6 (click)="openMapFollow()">
-          <ion-icon name="custom-follow"></ion-icon>
-          <div class="subjudul">FOLLOW</div>
-        </ion-col>
-        <ion-col class="third" col-6 (click)="openModal()">
-          <ion-icon name="custom-hourglass"></ion-icon>
-          <div class="subjudul">HISTORICAL DATA</div>
-        </ion-col>
-        <ion-col class="end" col-6 *ngIf="favorit" (click)="addFavorit()">
-          <ion-icon name="custom-unstar"></ion-icon>
-          <div class="subjudul">ADD FAVORIT</div>
-        </ion-col>
-        <ion-col class="end" col-6 *ngIf="!favorit" (click)="removeFavorit()">
-          <ion-icon name="custom-star"></ion-icon>
-          <div class="subjudul">REMOVE FAVORIT</div>
-        </ion-col>
-  </ion-row>
-  
 </ion-content>
+
+<ion-footer>
+    <ion-grid>
+      <ion-row text-center>
+        <ion-col col-6><button ion-button color="primary" block round  (click)="openMap()">Tracking</button></ion-col>
+        <ion-col col-6><button ion-button color="primary" block round  (click)="openMapFollow()">Follow</button></ion-col>
+        <ion-col col-6><button ion-button color="primary" block round  (click)="openModal()">Historical Data</button></ion-col>
+        <ion-col col-6 *ngIf="favorit"><button ion-button color="primary" block round (click)="addFavorit()">Add Favorit</button></ion-col>
+        <ion-col col-6 *ngIf="!favorit"><button ion-button color="primary" block round (click)="removeFavorit()">Remove Favorit</button></ion-col>
+      </ion-row>
+    </ion-grid>
+</ion-footer>

@@ -54,7 +54,7 @@ export class SearchResultMapPage {
   }
   getPosition(){
   	let marker;
-  	this.http.get('http://vis.telkomsat.co.id/api.vessel.tracking/vessel/search_map.php?id_user='+this.id_user+'&keyword='+this.keyword)
+  	this.http.get('http://vis.telkomsat.co.id/api.vessel.tracking/vessel/search/search_map.php?id_user='+this.id_user+'&keyword='+this.keyword)
   	.timeout(10*1000)
   	.map(res=>res.json())
   	.subscribe(data=>{
@@ -85,7 +85,7 @@ export class SearchResultMapPage {
       for(let i=0;i<this.locations.length;i++){
         let direction = new google.maps.LatLng(this.locations[i].lat, this.locations[i].lng);
         let station = new google.maps.LatLng(this.locations[i].latheading, this.locations[i].longheading);
-        let heading = google.maps.geometry.spherical.computeHeading(direction,station)+180;
+        let heading = google.maps.geometry.spherical.computeHeading(direction,station);
         this.customHeading(heading,10);
         this.image = {
           url: '../../assets/imgs/marker_map/'+this.CustomHeading+'.png',

@@ -51,7 +51,7 @@ export class FollowVesselPage {
   }
   getPosition(){
   	let marker;
-  	this.http.get('http://vis.telkomsat.co.id/api.vessel.tracking/vessel/follow_ship_v3.php?id_kapal='+this.id_node)
+  	this.http.get('http://vis.telkomsat.co.id/api.vessel.tracking/vessel/follow/follow.php?id_kapal='+this.id_node)
   	.timeout(10*1000)
   	.map(res=>res.json())
   	.subscribe(data=>{
@@ -61,7 +61,7 @@ export class FollowVesselPage {
         this.map.panTo(latLng);
         let direction = new google.maps.LatLng(this.locations[i].lat, this.locations[i].lng);
         let station = new google.maps.LatLng(this.locations[i].latheading, this.locations[i].longheading);
-        let heading = google.maps.geometry.spherical.computeHeading(direction,station)+180;
+        let heading = google.maps.geometry.spherical.computeHeading(direction,station);
         this.customHeading(heading,10);
         this.image = {
           url: '../../assets/imgs/marker_map/'+this.CustomHeading+'.png',

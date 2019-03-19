@@ -1,7 +1,7 @@
 <ion-header color="primary">
   <ion-navbar color="primary">
     <ion-title *ngIf="!ShowSearchText">Vessel</ion-title>
-    <ion-searchbar *ngIf="ShowSearchText" showCancelButton="true" (search)="onSearch($event)" (ionCancel)="ShowSearchText=false"></ion-searchbar>
+    <ion-searchbar #searchbar *ngIf="ShowSearchText" showCancelButton="true" (search)="onSearch($event)" (ionCancel)="ShowSearchText=false"></ion-searchbar>
     <ion-buttons end>
       <button ion-button icon-only *ngIf="!ShowSearchText" (click)="ShowSearchText=true">
         <ion-icon name="search"></ion-icon>
